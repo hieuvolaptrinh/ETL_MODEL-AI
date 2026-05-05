@@ -1,0 +1,1067 @@
+﻿<Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>ASM_DM_Loan</ID>
+  <Name>ASM_DM_Loan</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <LastUpdate>0001-01-01T00:00:00Z</LastUpdate>
+  <DataSourceImpersonationInfo>
+    <ImpersonationMode>Default</ImpersonationMode>
+    <ImpersonationInfoSecurity>Unchanged</ImpersonationInfoSecurity>
+  </DataSourceImpersonationInfo>
+  <MiningStructures>
+    <MiningStructure>
+      <ID>Logistic_Regression_Status</ID>
+      <Name>Logistic_Regression_Status</Name>
+      <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+      <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+      <Annotations>
+        <Annotation>
+          <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:CaseTableName</Name>
+          <Value>dbo_credit</Value>
+        </Annotation>
+        <Annotation>
+          <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+          <Value>true</Value>
+        </Annotation>
+        <Annotation>
+          <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+          <Value>
+            <dds xmlns="">
+              <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="2" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-3716" scrolltop="-2167" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="12065" y="9335" backcolor="2434342" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+                <font>
+                  <ddsxmlobjectstreamwrapper binary="010000009001b0300100065461686f6d61" />
+                </font>
+                <mouseicon>
+                  <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+                </mouseicon>
+              </diagram>
+              <layoutmanager>
+                <ddsxmlobj />
+              </layoutmanager>
+              <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="credit" left="20" top="0" logicalid="1" controlid="1" masterid="0" hint1="0" hint2="0" width="4593" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                <control>
+                  <ddsxmlobjectstreaminitwrapper binary="000e0000f111000088130000" />
+                </control>
+                <layoutobject>
+                  <ddsxmlobj>
+                    <property name="LogicalObject" value="dbo_credit" vartype="8" />
+                  </ddsxmlobj>
+                </layoutobject>
+                <shape groupshapeid="0" groupnode="0" />
+              </ddscontrol>
+            </dds>
+          </Value>
+        </Annotation>
+        <Annotation>
+          <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+          <Value>false</Value>
+        </Annotation>
+        <Annotation>
+          <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+          <Value>true</Value>
+        </Annotation>
+        <Annotation>
+          <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+          <Value>-3716</Value>
+        </Annotation>
+        <Annotation>
+          <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+          <Value>-2167</Value>
+        </Annotation>
+        <Annotation>
+          <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+          <Value>20</Value>
+        </Annotation>
+        <Annotation>
+          <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+          <Value>0</Value>
+        </Annotation>
+        <Annotation>
+          <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+          <Value>100</Value>
+        </Annotation>
+      </Annotations>
+      <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+      <State>Unprocessed</State>
+      <Source xsi:type="DataSourceViewBinding">
+        <DataSourceViewID>ETL Model AI</DataSourceViewID>
+      </Source>
+      <Columns>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Age</ID>
+          <Name>Age</Name>
+          <Type>Text</Type>
+          <Content>Ordered</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>WChar</DataType>
+              <DataSize>255</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>age</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Approv In Adv</ID>
+          <Name>Approv In Adv</Name>
+          <Type>Text</Type>
+          <Content>Discrete</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>WChar</DataType>
+              <DataSize>255</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>approv_in_adv</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Business Or Commercial</ID>
+          <Name>Business Or Commercial</Name>
+          <Type>Text</Type>
+          <Content>Discrete</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>WChar</DataType>
+              <DataSize>255</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>business_or_commercial</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Co-applicant Credit Type</ID>
+          <Name>Co-applicant Credit Type</Name>
+          <Type>Text</Type>
+          <Content>Discrete</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>WChar</DataType>
+              <DataSize>255</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>co-applicant_credit_type</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Construction Type</ID>
+          <Name>Construction Type</Name>
+          <Type>Text</Type>
+          <Content>Discrete</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>WChar</DataType>
+              <DataSize>255</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>construction_type</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Credit Score</ID>
+          <Name>Credit Score</Name>
+          <Type>Double</Type>
+          <Content>Continuous</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>Double</DataType>
+              <DataSize>-1</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>Credit_Score</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Credit Type</ID>
+          <Name>Credit Type</Name>
+          <Type>Text</Type>
+          <Content>Discrete</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>WChar</DataType>
+              <DataSize>255</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>credit_type</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Credit Worthiness</ID>
+          <Name>Credit Worthiness</Name>
+          <Type>Text</Type>
+          <Content>Discrete</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>WChar</DataType>
+              <DataSize>255</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>Credit_Worthiness</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Dtir1</ID>
+          <Name>Dtir1</Name>
+          <Type>Double</Type>
+          <Content>Continuous</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>Double</DataType>
+              <DataSize>-1</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>dtir1</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Gender</ID>
+          <Name>Gender</Name>
+          <Type>Text</Type>
+          <Content>Discrete</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>WChar</DataType>
+              <DataSize>255</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>Gender</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>ID</ID>
+          <Name>ID</Name>
+          <IsKey>true</IsKey>
+          <Type>Long</Type>
+          <Content>Key</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>Integer</DataType>
+              <DataSize>-1</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>ID</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Income</ID>
+          <Name>Income</Name>
+          <Type>Double</Type>
+          <Content>Continuous</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>Double</DataType>
+              <DataSize>-1</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>income</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Interest Only</ID>
+          <Name>Interest Only</Name>
+          <Type>Text</Type>
+          <Content>Discrete</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>WChar</DataType>
+              <DataSize>255</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>interest_only</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Interest Rate Spread</ID>
+          <Name>Interest Rate Spread</Name>
+          <Type>Double</Type>
+          <Content>Continuous</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>Double</DataType>
+              <DataSize>-1</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>Interest_rate_spread</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Loan Amount</ID>
+          <Name>Loan Amount</Name>
+          <Type>Double</Type>
+          <Content>Discretized</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>Double</DataType>
+              <DataSize>-1</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>loan_amount</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Loan Limit</ID>
+          <Name>Loan Limit</Name>
+          <Type>Text</Type>
+          <Content>Discrete</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>WChar</DataType>
+              <DataSize>255</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>loan_limit</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Loan Purpose</ID>
+          <Name>Loan Purpose</Name>
+          <Type>Text</Type>
+          <Content>Discrete</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>WChar</DataType>
+              <DataSize>255</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>loan_purpose</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Loan Type</ID>
+          <Name>Loan Type</Name>
+          <Type>Text</Type>
+          <Content>Discrete</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>WChar</DataType>
+              <DataSize>255</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>loan_type</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>LTV</ID>
+          <Name>LTV</Name>
+          <Type>Double</Type>
+          <Content>Continuous</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>Double</DataType>
+              <DataSize>-1</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>LTV</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Lump Sum Payment</ID>
+          <Name>Lump Sum Payment</Name>
+          <Type>Text</Type>
+          <Content>Discrete</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>WChar</DataType>
+              <DataSize>255</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>lump_sum_payment</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Neg Ammortization</ID>
+          <Name>Neg Ammortization</Name>
+          <Type>Text</Type>
+          <Content>Discrete</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>WChar</DataType>
+              <DataSize>255</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>Neg_ammortization</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Occupancy Type</ID>
+          <Name>Occupancy Type</Name>
+          <Type>Text</Type>
+          <Content>Discrete</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>WChar</DataType>
+              <DataSize>255</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>occupancy_type</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Open Credit</ID>
+          <Name>Open Credit</Name>
+          <Type>Text</Type>
+          <Content>Discrete</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>WChar</DataType>
+              <DataSize>255</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>open_credit</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Property Value</ID>
+          <Name>Property Value</Name>
+          <Type>Double</Type>
+          <Content>Continuous</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>Double</DataType>
+              <DataSize>-1</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>property_value</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Rate Of Interest</ID>
+          <Name>Rate Of Interest</Name>
+          <Type>Double</Type>
+          <Content>Continuous</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>Double</DataType>
+              <DataSize>-1</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>rate_of_interest</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Region</ID>
+          <Name>Region</Name>
+          <Type>Text</Type>
+          <Content>Discrete</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>WChar</DataType>
+              <DataSize>255</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>Region</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Secured By</ID>
+          <Name>Secured By</Name>
+          <Type>Text</Type>
+          <Content>Discrete</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>WChar</DataType>
+              <DataSize>255</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>Secured_by</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Security Type</ID>
+          <Name>Security Type</Name>
+          <Type>Text</Type>
+          <Content>Discrete</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>WChar</DataType>
+              <DataSize>255</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>Security_Type</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Status</ID>
+          <Name>Status</Name>
+          <Type>Double</Type>
+          <Content>Discrete</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>Double</DataType>
+              <DataSize>-1</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>Status</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Submission Of Application</ID>
+          <Name>Submission Of Application</Name>
+          <Type>Text</Type>
+          <Content>Discrete</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>WChar</DataType>
+              <DataSize>255</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>submission_of_application</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Term</ID>
+          <Name>Term</Name>
+          <Type>Double</Type>
+          <Content>Continuous</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>Double</DataType>
+              <DataSize>-1</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>term</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Total Units</ID>
+          <Name>Total Units</Name>
+          <Type>Text</Type>
+          <Content>Discrete</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>WChar</DataType>
+              <DataSize>255</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>total_units</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Upfront Charges</ID>
+          <Name>Upfront Charges</Name>
+          <Type>Double</Type>
+          <Content>Continuous</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>Double</DataType>
+              <DataSize>-1</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>Upfront_charges</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+        <Column xsi:type="ScalarMiningStructureColumn">
+          <ID>Year</ID>
+          <Name>Year</Name>
+          <Type>Double</Type>
+          <Content>Discrete</Content>
+          <KeyColumns>
+            <KeyColumn>
+              <DataType>Double</DataType>
+              <DataSize>-1</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_credit</TableID>
+                <ColumnID>year</ColumnID>
+              </Source>
+            </KeyColumn>
+          </KeyColumns>
+        </Column>
+      </Columns>
+      <MiningModels>
+        <MiningModel>
+          <ID>Credit</ID>
+          <Name>Credit</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Algorithm>Microsoft_Logistic_Regression</Algorithm>
+          <Columns>
+            <Column>
+              <ID>Age</ID>
+              <Name>Age</Name>
+              <SourceColumnID>Age</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Approv In Adv</ID>
+              <Name>Approv In Adv</Name>
+              <SourceColumnID>Approv In Adv</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Business Or Commercial</ID>
+              <Name>Business Or Commercial</Name>
+              <SourceColumnID>Business Or Commercial</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Co-applicant Credit Type</ID>
+              <Name>Co-applicant Credit Type</Name>
+              <SourceColumnID>Co-applicant Credit Type</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Construction Type</ID>
+              <Name>Construction Type</Name>
+              <SourceColumnID>Construction Type</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Credit Score</ID>
+              <Name>Credit Score</Name>
+              <SourceColumnID>Credit Score</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Credit Type</ID>
+              <Name>Credit Type</Name>
+              <SourceColumnID>Credit Type</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Credit Worthiness</ID>
+              <Name>Credit Worthiness</Name>
+              <SourceColumnID>Credit Worthiness</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Dtir1</ID>
+              <Name>Dtir1</Name>
+              <SourceColumnID>Dtir1</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Gender</ID>
+              <Name>Gender</Name>
+              <SourceColumnID>Gender</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>ID</ID>
+              <Name>ID</Name>
+              <SourceColumnID>ID</SourceColumnID>
+              <Usage>Key</Usage>
+            </Column>
+            <Column>
+              <ID>Income</ID>
+              <Name>Income</Name>
+              <SourceColumnID>Income</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Interest Only</ID>
+              <Name>Interest Only</Name>
+              <SourceColumnID>Interest Only</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Interest Rate Spread</ID>
+              <Name>Interest Rate Spread</Name>
+              <SourceColumnID>Interest Rate Spread</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Loan Amount</ID>
+              <Name>Loan Amount</Name>
+              <SourceColumnID>Loan Amount</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Loan Limit</ID>
+              <Name>Loan Limit</Name>
+              <SourceColumnID>Loan Limit</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Loan Purpose</ID>
+              <Name>Loan Purpose</Name>
+              <SourceColumnID>Loan Purpose</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Loan Type</ID>
+              <Name>Loan Type</Name>
+              <SourceColumnID>Loan Type</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>LTV</ID>
+              <Name>LTV</Name>
+              <SourceColumnID>LTV</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Lump Sum Payment</ID>
+              <Name>Lump Sum Payment</Name>
+              <SourceColumnID>Lump Sum Payment</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Neg Ammortization</ID>
+              <Name>Neg Ammortization</Name>
+              <SourceColumnID>Neg Ammortization</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Occupancy Type</ID>
+              <Name>Occupancy Type</Name>
+              <SourceColumnID>Occupancy Type</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Open Credit</ID>
+              <Name>Open Credit</Name>
+              <SourceColumnID>Open Credit</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Property Value</ID>
+              <Name>Property Value</Name>
+              <SourceColumnID>Property Value</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Rate Of Interest</ID>
+              <Name>Rate Of Interest</Name>
+              <SourceColumnID>Rate Of Interest</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Region</ID>
+              <Name>Region</Name>
+              <SourceColumnID>Region</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Secured By</ID>
+              <Name>Secured By</Name>
+              <SourceColumnID>Secured By</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Security Type</ID>
+              <Name>Security Type</Name>
+              <SourceColumnID>Security Type</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Status</ID>
+              <Name>Status</Name>
+              <SourceColumnID>Status</SourceColumnID>
+              <Usage>PredictOnly</Usage>
+            </Column>
+            <Column>
+              <ID>Submission Of Application</ID>
+              <Name>Submission Of Application</Name>
+              <SourceColumnID>Submission Of Application</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Term</ID>
+              <Name>Term</Name>
+              <SourceColumnID>Term</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Total Units</ID>
+              <Name>Total Units</Name>
+              <SourceColumnID>Total Units</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Upfront Charges</ID>
+              <Name>Upfront Charges</Name>
+              <SourceColumnID>Upfront Charges</SourceColumnID>
+            </Column>
+            <Column>
+              <ID>Year</ID>
+              <Name>Year</Name>
+              <SourceColumnID>Year</SourceColumnID>
+            </Column>
+          </Columns>
+        </MiningModel>
+      </MiningModels>
+      <ddl100_100:HoldoutMaxPercent>30</ddl100_100:HoldoutMaxPercent>
+    </MiningStructure>
+  </MiningStructures>
+  <DataSources>
+    <DataSource xsi:type="RelationalDataSource">
+      <ID>ETL Model AI</ID>
+      <Name>ETL Model AI</Name>
+      <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+      <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+      <ConnectionString>Provider=SQLNCLI11.1;Data Source=localhost;Integrated Security=SSPI;Initial Catalog=ETLModelAI</ConnectionString>
+      <ConnectionStringSecurity>Unchanged</ConnectionStringSecurity>
+      <ImpersonationInfo>
+        <ImpersonationMode>ImpersonateServiceAccount</ImpersonationMode>
+        <ImpersonationInfoSecurity>Unchanged</ImpersonationInfoSecurity>
+      </ImpersonationInfo>
+      <Timeout>PT0S</Timeout>
+    </DataSource>
+  </DataSources>
+  <DataSourceViews>
+    <DataSourceView>
+      <ID>ETL Model AI</ID>
+      <Name>ETL Model AI</Name>
+      <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+      <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+      <Annotations>
+        <Annotation>
+          <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+          <Value>true</Value>
+        </Annotation>
+        <Annotation>
+          <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:CurrentLayout</Name>
+          <Value>_ALL_TABLES_</Value>
+        </Annotation>
+        <Annotation>
+          <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:SchemaRestriction</Name>
+          <Value></Value>
+        </Annotation>
+        <Annotation>
+          <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:RetrieveRelationships</Name>
+          <Value>true</Value>
+        </Annotation>
+        <Annotation>
+          <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:Layouts</Name>
+          <Value>
+            <Layouts xmlns="">
+              <Diagram>
+                <Name>_ALL_TABLES_</Name>
+                <DiagramLayout />
+                <ShowRelationshipNames>False</ShowRelationshipNames>
+                <UseDiagramDefaultLayout>True</UseDiagramDefaultLayout>
+                <DiagramViewPortLeft>0</DiagramViewPortLeft>
+                <DiagramViewPortTop>0</DiagramViewPortTop>
+                <DiagramBoundingLeft>0</DiagramBoundingLeft>
+                <DiagramBoundingTop>0</DiagramBoundingTop>
+                <DiagramZoom>100</DiagramZoom>
+              </Diagram>
+            </Layouts>
+          </Value>
+        </Annotation>
+      </Annotations>
+      <DataSourceID>ETL Model AI</DataSourceID>
+      <Schema>
+        <xs:schema id="ETL_x0020_Model_x0020_AI" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+          <xs:element name="ETL_x0020_Model_x0020_AI" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:design-time-name="70ea4978-f0d0-4cf8-a216-f484c4acd060">
+            <xs:complexType>
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="dbo_credit" msprop:design-time-name="77052ce0-4995-4055-bd61-72711c08715a" msprop:FriendlyName="credit" msprop:DbSchemaName="dbo" msprop:DbTableName="credit" msprop:TableType="Table">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="ID" msprop:design-time-name="6437e4b9-6411-4b0a-a424-0b9808dc697e" msprop:DbColumnName="ID" msprop:FriendlyName="ID" type="xs:int" />
+                      <xs:element name="year" msprop:design-time-name="96adf7e9-3f03-4e63-81d9-041e2297c612" msprop:DbColumnName="year" msprop:FriendlyName="year" type="xs:double" minOccurs="0" />
+                      <xs:element name="loan_limit" msprop:design-time-name="7bd23623-eaf0-4d06-9b3f-ae1d3c78c736" msprop:DbColumnName="loan_limit" msprop:FriendlyName="loan_limit" minOccurs="0">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:maxLength value="255" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="Gender" msprop:design-time-name="236584dd-232f-46a8-9551-9cc454098e00" msprop:DbColumnName="Gender" msprop:FriendlyName="Gender" minOccurs="0">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:maxLength value="255" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="approv_in_adv" msprop:design-time-name="f6d96fd7-9c19-4c97-8e2e-b4ee0a8a282e" msprop:DbColumnName="approv_in_adv" msprop:FriendlyName="approv_in_adv" minOccurs="0">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:maxLength value="255" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="loan_type" msprop:design-time-name="e1516af6-ec4c-4d34-b34e-c6116db709d8" msprop:DbColumnName="loan_type" msprop:FriendlyName="loan_type" minOccurs="0">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:maxLength value="255" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="loan_purpose" msprop:design-time-name="07294817-5eb3-41ed-89fa-fe39acb0dd15" msprop:DbColumnName="loan_purpose" msprop:FriendlyName="loan_purpose" minOccurs="0">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:maxLength value="255" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="Credit_Worthiness" msprop:design-time-name="fd49b850-52cd-4863-bdf3-0aa76fff35f1" msprop:DbColumnName="Credit_Worthiness" msprop:FriendlyName="Credit_Worthiness" minOccurs="0">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:maxLength value="255" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="open_credit" msprop:design-time-name="e15b00b6-34b7-4540-93b6-5ea4c790b6ed" msprop:DbColumnName="open_credit" msprop:FriendlyName="open_credit" minOccurs="0">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:maxLength value="255" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="business_or_commercial" msprop:design-time-name="b283f8a9-1fbc-4ebf-87ee-04b524c94328" msprop:DbColumnName="business_or_commercial" msprop:FriendlyName="business_or_commercial" minOccurs="0">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:maxLength value="255" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="loan_amount" msprop:design-time-name="6d413024-4341-41f6-836b-0921fff239cb" msprop:DbColumnName="loan_amount" msprop:FriendlyName="loan_amount" type="xs:double" minOccurs="0" />
+                      <xs:element name="rate_of_interest" msprop:design-time-name="60e1eb4f-0741-4ba4-a7e6-f86a8d0c3b11" msprop:DbColumnName="rate_of_interest" msprop:FriendlyName="rate_of_interest" type="xs:double" minOccurs="0" />
+                      <xs:element name="Interest_rate_spread" msprop:design-time-name="2e886dd8-b1cb-4326-a9af-642e16367f5a" msprop:DbColumnName="Interest_rate_spread" msprop:FriendlyName="Interest_rate_spread" type="xs:double" minOccurs="0" />
+                      <xs:element name="Upfront_charges" msprop:design-time-name="59d5945a-e7ca-42eb-8b82-738039c63ffb" msprop:DbColumnName="Upfront_charges" msprop:FriendlyName="Upfront_charges" type="xs:double" minOccurs="0" />
+                      <xs:element name="term" msprop:design-time-name="1b0a6942-0bb2-4a39-98a6-b1e960edc4df" msprop:DbColumnName="term" msprop:FriendlyName="term" type="xs:double" minOccurs="0" />
+                      <xs:element name="Neg_ammortization" msprop:design-time-name="0ffb240b-4200-4bf5-9c96-6480cc0b3c06" msprop:DbColumnName="Neg_ammortization" msprop:FriendlyName="Neg_ammortization" minOccurs="0">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:maxLength value="255" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="interest_only" msprop:design-time-name="81d3ff25-9f44-4702-9168-a0d9b27af52b" msprop:DbColumnName="interest_only" msprop:FriendlyName="interest_only" minOccurs="0">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:maxLength value="255" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="lump_sum_payment" msprop:design-time-name="8324aeb5-fd52-4509-afe2-c4f133917256" msprop:DbColumnName="lump_sum_payment" msprop:FriendlyName="lump_sum_payment" minOccurs="0">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:maxLength value="255" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="property_value" msprop:design-time-name="14fd5b1b-830a-4fca-97ba-0e4fd41ab4dc" msprop:DbColumnName="property_value" msprop:FriendlyName="property_value" type="xs:double" minOccurs="0" />
+                      <xs:element name="construction_type" msprop:design-time-name="c374eb83-de74-422a-87c3-1ec6287d2522" msprop:DbColumnName="construction_type" msprop:FriendlyName="construction_type" minOccurs="0">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:maxLength value="255" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="occupancy_type" msprop:design-time-name="a0bed098-841c-4e7b-9ebf-0a7e301512e1" msprop:DbColumnName="occupancy_type" msprop:FriendlyName="occupancy_type" minOccurs="0">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:maxLength value="255" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="Secured_by" msprop:design-time-name="dd0a9f76-7a97-431c-a78c-23dae4f1f655" msprop:DbColumnName="Secured_by" msprop:FriendlyName="Secured_by" minOccurs="0">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:maxLength value="255" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="total_units" msprop:design-time-name="49ff80e0-6aaa-407d-84dd-4b0de284705c" msprop:DbColumnName="total_units" msprop:FriendlyName="total_units" minOccurs="0">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:maxLength value="255" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="income" msprop:design-time-name="64efb881-9245-424e-831f-dc6e76bb4fe7" msprop:DbColumnName="income" msprop:FriendlyName="income" type="xs:double" minOccurs="0" />
+                      <xs:element name="credit_type" msprop:design-time-name="4157a806-77a0-4900-beb9-37c9ad981003" msprop:DbColumnName="credit_type" msprop:FriendlyName="credit_type" minOccurs="0">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:maxLength value="255" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="Credit_Score" msprop:design-time-name="20f0a3fb-691e-4e6e-acfb-8d0aea5bb65e" msprop:DbColumnName="Credit_Score" msprop:FriendlyName="Credit_Score" type="xs:double" minOccurs="0" />
+                      <xs:element name="co-applicant_credit_type" msprop:design-time-name="72560f72-d642-484d-b547-599b3dd18795" msprop:DbColumnName="co-applicant_credit_type" msprop:FriendlyName="co-applicant_credit_type" minOccurs="0">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:maxLength value="255" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="age" msprop:design-time-name="61e9827d-00d4-4688-ac56-cc221cd1dc80" msprop:DbColumnName="age" msprop:FriendlyName="age" minOccurs="0">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:maxLength value="255" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="submission_of_application" msprop:design-time-name="bcfc4ca2-ca11-4002-b878-417d9466b596" msprop:DbColumnName="submission_of_application" msprop:FriendlyName="submission_of_application" minOccurs="0">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:maxLength value="255" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="LTV" msprop:design-time-name="e070151a-a031-49cd-8e25-b3f2e4728670" msprop:DbColumnName="LTV" msprop:FriendlyName="LTV" type="xs:double" minOccurs="0" />
+                      <xs:element name="Region" msprop:design-time-name="5d614b29-ab12-4a2c-b98c-4235f7f00fec" msprop:DbColumnName="Region" msprop:FriendlyName="Region" minOccurs="0">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:maxLength value="255" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="Security_Type" msprop:design-time-name="f085ba51-8f4a-4a75-85cc-07bd59d46c4e" msprop:DbColumnName="Security_Type" msprop:FriendlyName="Security_Type" minOccurs="0">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:maxLength value="255" />
+                          </xs:restriction>
+                        </xs:simpleType>
+                      </xs:element>
+                      <xs:element name="Status" msprop:design-time-name="9f5160a9-5201-4f3c-8b67-bee8521dc2da" msprop:DbColumnName="Status" msprop:FriendlyName="Status" type="xs:double" minOccurs="0" />
+                      <xs:element name="dtir1" msprop:design-time-name="24a690a3-0cbf-47c1-814a-b65f6f201f49" msprop:DbColumnName="dtir1" msprop:FriendlyName="dtir1" type="xs:double" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:choice>
+            </xs:complexType>
+            <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+              <xs:selector xpath=".//dbo_credit" />
+              <xs:field xpath="ID" />
+            </xs:unique>
+          </xs:element>
+        </xs:schema>
+        <ETL_x0020_Model_x0020_AI xmlns="" />
+      </Schema>
+    </DataSourceView>
+  </DataSourceViews>
+</Database>

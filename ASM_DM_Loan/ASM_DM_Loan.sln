@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.37206.5
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "ASM_DM_Loan", "ASM_DM_Loan\ASM_DM_Loan.dwproj", "{57EA2C45-80A3-401E-A8D7-AE87F7A1283E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57EA2C45-80A3-401E-A8D7-AE87F7A1283E}.Development|Default.ActiveCfg = Development
+		{57EA2C45-80A3-401E-A8D7-AE87F7A1283E}.Development|Default.Build.0 = Development
+		{57EA2C45-80A3-401E-A8D7-AE87F7A1283E}.Development|Default.Deploy.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1EB49AA0-959B-4C61-B2DC-96393EDAFECF}
+	EndGlobalSection
+EndGlobal
