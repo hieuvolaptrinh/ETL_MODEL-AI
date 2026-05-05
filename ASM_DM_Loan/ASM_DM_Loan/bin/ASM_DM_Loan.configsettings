@@ -14,6 +14,12 @@
       <MiningStructure>
         <ID>Logistic_Regression_Status</ID>
       </MiningStructure>
+      <MiningStructure>
+        <ID>Credit_Decision_Tree</ID>
+      </MiningStructure>
+      <MiningStructure>
+        <ID>Credit_Clustering</ID>
+      </MiningStructure>
     </MiningStructures>
     <DataSourceImpersonationInfo>
       <ImpersonationMode xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">Default</ImpersonationMode>

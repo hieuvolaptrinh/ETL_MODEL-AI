@@ -1,6 +1,6 @@
-﻿<MiningStructure xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="e229f6fe-d9f0-4373-8e6b-38cb0b3c14f8" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
-  <ID>Logistic_Regression_Status</ID>
-  <Name>Logistic_Regression_Status</Name>
+﻿<MiningStructure xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="7918ed1b-2915-4e07-89d9-fdf6c491fa64" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Credit_Decision_Tree</ID>
+  <Name>Credit_Decision_Tree</Name>
   <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
   <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
   <Annotations>
@@ -14,32 +14,6 @@
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
-      <Value>
-        <dds xmlns="">
-          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="2" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-7061" scrolltop="-986" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="18754" y="10986" backcolor="16119285" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
-            <font>
-              <ddsxmlobjectstreamwrapper binary="010000009001b0300100065461686f6d61" />
-            </font>
-            <mouseicon>
-              <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
-            </mouseicon>
-          </diagram>
-          <layoutmanager>
-            <ddsxmlobj />
-          </layoutmanager>
-          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="credit" left="-1" top="1609" logicalid="1" controlid="1" masterid="0" hint1="0" hint2="0" width="4593" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
-            <control>
-              <ddsxmlobjectstreaminitwrapper binary="000e0000f111000088130000" />
-            </control>
-            <layoutobject>
-              <ddsxmlobj>
-                <property name="LogicalObject" value="dbo_credit" vartype="8" />
-              </ddsxmlobj>
-            </layoutobject>
-            <shape groupshapeid="0" groupnode="0" />
-          </ddscontrol>
-        </dds>
-      </Value>
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
@@ -51,19 +25,19 @@
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
-      <Value>-7061</Value>
+      <Value>0</Value>
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
-      <Value>-986</Value>
+      <Value>0</Value>
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
-      <Value>-1</Value>
+      <Value>0</Value>
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
-      <Value>1609</Value>
+      <Value>0</Value>
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
@@ -72,549 +46,549 @@
   </Annotations>
   <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
   <State>Unprocessed</State>
-  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="0d1bcc09-df14-4821-8644-aab1ba815db0">
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="bda8e907-e58f-4c1e-a2b9-73d95d93f703">
     <DataSourceViewID>ETL Model AI</DataSourceViewID>
   </Source>
   <Columns>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="059bd887-236a-44ac-be80-8e1170902144">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="04791b39-e1d4-4200-83c8-2b6b286ebce6">
       <ID>Age</ID>
       <Name>Age</Name>
       <Type>Text</Type>
-      <Content>Ordered</Content>
+      <Content>Discrete</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="56c3e92c-5aa9-460b-acc0-2458a2942e79">
+        <KeyColumn dwd:design-time-name="6017540d-8cf3-40ac-a0a0-9da57806111f">
           <DataType>WChar</DataType>
           <DataSize>255</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="7d0f84b7-a95e-485a-8d20-9f61cb2b73e5">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="f7b87e83-d896-4b64-9c58-10ba5d0f965f">
             <TableID>dbo_credit</TableID>
             <ColumnID>age</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="3a2b3801-e321-468c-9e6e-0823f5083fb7">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="1c774cb0-561b-436c-9e37-8c00d4d6c461">
       <ID>Approv In Adv</ID>
       <Name>Approv In Adv</Name>
       <Type>Text</Type>
       <Content>Discrete</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="2c4d88a5-972d-485d-84b8-4ef7bbf167c5">
+        <KeyColumn dwd:design-time-name="9cfabaf3-5f1f-4e89-8b07-46e35f9121fc">
           <DataType>WChar</DataType>
           <DataSize>255</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="6980a7bc-e6c9-4f84-be94-32903eaf1961">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="af93481f-dc74-4d1f-ad7e-60bca71c95d9">
             <TableID>dbo_credit</TableID>
             <ColumnID>approv_in_adv</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="491d3652-2e07-43a6-a6f1-036b61ba6fca">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="a02bcf6e-01bd-4cd8-aea5-d37dd8f932e8">
       <ID>Business Or Commercial</ID>
       <Name>Business Or Commercial</Name>
       <Type>Text</Type>
       <Content>Discrete</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="7f03c175-af70-4bdf-9281-b1661e1aa10e">
+        <KeyColumn dwd:design-time-name="353c23db-0e6b-4585-81d8-deb03ae9d930">
           <DataType>WChar</DataType>
           <DataSize>255</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="5198c90e-d90c-4c7e-a2f3-c5112886fad7">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="1397c556-a7af-4900-942d-7c2c11e95723">
             <TableID>dbo_credit</TableID>
             <ColumnID>business_or_commercial</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="ae89937e-5896-4512-9818-08dbb20eee52">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="8eeeee42-8a48-4825-aae1-7b6e4dac2773">
       <ID>Co-applicant Credit Type</ID>
       <Name>Co-applicant Credit Type</Name>
       <Type>Text</Type>
       <Content>Discrete</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="7dd32cf6-8ca6-4dfa-9756-f9c6d7a608e9">
+        <KeyColumn dwd:design-time-name="e38273f5-4205-4132-a118-0dd7d927b084">
           <DataType>WChar</DataType>
           <DataSize>255</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="a6806c8d-0502-41e7-be5a-c3e0f766bf25">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="370e18d8-4a9b-421a-b933-4e8b0a51925f">
             <TableID>dbo_credit</TableID>
             <ColumnID>co-applicant_credit_type</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="59e7e03d-922a-4205-bf39-bad8b217aa69">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="badc426f-5db0-4429-a192-651d5c0ffc73">
       <ID>Construction Type</ID>
       <Name>Construction Type</Name>
       <Type>Text</Type>
       <Content>Discrete</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="879c27f4-dda4-43ad-ae26-f67255c33b4a">
+        <KeyColumn dwd:design-time-name="b0bfb53c-c443-4a86-8006-8d6291884e28">
           <DataType>WChar</DataType>
           <DataSize>255</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="885f675c-a1a3-421b-b84e-3b8b5c62e0b3">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="9aa759df-66d5-4830-a2ee-3ac169b35ef1">
             <TableID>dbo_credit</TableID>
             <ColumnID>construction_type</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="087219c9-69ba-4cd3-b352-5c4957b21e2d">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="63ea44c3-8153-4ed2-afd4-3f8fb009c98f">
       <ID>Credit Score</ID>
       <Name>Credit Score</Name>
       <Type>Double</Type>
       <Content>Continuous</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="282777cd-2625-43ae-801f-fbe0f8dc666f">
+        <KeyColumn dwd:design-time-name="54738eb4-841d-47f0-86b0-ea2f7a106542">
           <DataType>Double</DataType>
           <DataSize>-1</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="80da85f9-f852-40b4-853e-c47864ac0d4b">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="c56e0033-8d7a-4172-b27a-83cfedbad7eb">
             <TableID>dbo_credit</TableID>
             <ColumnID>Credit_Score</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="a5d0fdf6-8d8e-41dc-8445-7f9610d93c49">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="5e2486c1-c1d2-4ddd-82ba-52967281a42c">
       <ID>Credit Type</ID>
       <Name>Credit Type</Name>
       <Type>Text</Type>
       <Content>Discrete</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="c9a0991f-4073-4337-b337-9d91d3c49499">
+        <KeyColumn dwd:design-time-name="14f94174-8426-41a1-a1e3-05d0931df629">
           <DataType>WChar</DataType>
           <DataSize>255</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="16d18d31-abfe-4cd7-9994-f0e24efb1102">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="50d6e505-b360-479a-b60f-d450631c79d3">
             <TableID>dbo_credit</TableID>
             <ColumnID>credit_type</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="2343c500-37aa-4d56-9caf-2a910ccf780d">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="5cd6159b-6894-4ba9-b02b-0ae437833c89">
       <ID>Credit Worthiness</ID>
       <Name>Credit Worthiness</Name>
       <Type>Text</Type>
       <Content>Discrete</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="1c2b0316-5103-4acc-8f32-8feba5e4bc8a">
+        <KeyColumn dwd:design-time-name="c2e1f5c5-404f-4ebf-bc35-d5d352c393d7">
           <DataType>WChar</DataType>
           <DataSize>255</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="f54def3b-358f-4aff-a6dd-d52994ebae62">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="fba92dc9-a1d2-4713-8c6e-d3f0b5279fcb">
             <TableID>dbo_credit</TableID>
             <ColumnID>Credit_Worthiness</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="5e0dc416-5612-4d11-942a-a94bfdf46678">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="53d53ac7-8764-4954-af58-64a0e93229b1">
       <ID>Dtir1</ID>
       <Name>Dtir1</Name>
       <Type>Double</Type>
       <Content>Continuous</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="c96a44aa-b823-4201-8ed8-b42166902e75">
+        <KeyColumn dwd:design-time-name="19c0e85f-d2b4-4116-899f-554e3941e979">
           <DataType>Double</DataType>
           <DataSize>-1</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="46b71185-2ce9-4f19-8318-fb793f5b8ff7">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="c3d4b33e-c13c-4fea-a939-d4ff06c540dd">
             <TableID>dbo_credit</TableID>
             <ColumnID>dtir1</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="31950b8f-d090-46be-a040-3893ad3ea524">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="42e4c302-271a-41e7-a999-ad66e0aa5de6">
       <ID>Gender</ID>
       <Name>Gender</Name>
       <Type>Text</Type>
       <Content>Discrete</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="1a4e9637-828f-41c6-a02b-6ed8c79139d2">
+        <KeyColumn dwd:design-time-name="329b5b00-1155-4812-b898-33634c3dc40e">
           <DataType>WChar</DataType>
           <DataSize>255</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="a87f0c7d-cf5e-4ded-ad9d-671897c17b95">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="c21117f9-6058-4938-9535-b2ee3b5e259f">
             <TableID>dbo_credit</TableID>
             <ColumnID>Gender</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="14de2459-1e53-4e9e-a36a-921b625371a8">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="af3bdfb6-e639-4dac-94d4-b0d96d214633">
       <ID>ID</ID>
       <Name>ID</Name>
       <IsKey>true</IsKey>
       <Type>Long</Type>
       <Content>Key</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="f4ab1776-ad93-4a29-90ef-24c71eecc284">
+        <KeyColumn dwd:design-time-name="01ecedb6-6646-4184-9446-27b5babf142c">
           <DataType>Integer</DataType>
           <DataSize>-1</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="6086cf26-fdae-4b8c-b58d-9a76cd1434c7">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="54b0ee32-5218-467c-90c7-dfe690172369">
             <TableID>dbo_credit</TableID>
             <ColumnID>ID</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="715db8a2-f2fa-47dd-a6a8-b7b50aab90ee">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="2181926c-4d8b-4360-8787-035ee943b2e8">
       <ID>Income</ID>
       <Name>Income</Name>
       <Type>Double</Type>
       <Content>Continuous</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="ff5efaae-2577-4836-a1ab-3af9ba4439dd">
+        <KeyColumn dwd:design-time-name="2a773f47-392b-4abf-9b0f-7f458f4b4033">
           <DataType>Double</DataType>
           <DataSize>-1</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="d0e09c1b-253c-4200-a648-f71177a1630d">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="d668ef9d-a67f-4179-b74f-14bc20425817">
             <TableID>dbo_credit</TableID>
             <ColumnID>income</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="9dc553c3-c275-4071-97f5-89c22c05b706">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="e70de698-4e8f-4d2e-9b70-b11392f79ae5">
       <ID>Interest Only</ID>
       <Name>Interest Only</Name>
       <Type>Text</Type>
       <Content>Discrete</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="1c6f7f97-bf3a-4ae2-99bf-38ea5660c3f5">
+        <KeyColumn dwd:design-time-name="96d73bf2-08dc-4a57-88f8-bedf07c61a5b">
           <DataType>WChar</DataType>
           <DataSize>255</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="7d71a7fa-c963-42c4-a986-f21511ba4611">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="df495562-698f-46c4-8b11-46bebb7248cf">
             <TableID>dbo_credit</TableID>
             <ColumnID>interest_only</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="9ec11966-c8bc-4bce-a531-db207c85be31">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="62e7397f-ff2b-4228-a745-4ece73d1d220">
       <ID>Interest Rate Spread</ID>
       <Name>Interest Rate Spread</Name>
       <Type>Double</Type>
       <Content>Continuous</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="bfc75dfe-2076-4e38-b1ea-50c7dffde403">
+        <KeyColumn dwd:design-time-name="bffec961-55d0-4792-a607-7c5ec57d0636">
           <DataType>Double</DataType>
           <DataSize>-1</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="ae380231-f17b-4471-ad4a-609b670815d9">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="e2f42b73-ad77-4ee5-98e2-dcdbfe10b74f">
             <TableID>dbo_credit</TableID>
             <ColumnID>Interest_rate_spread</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="2a424d88-99ba-47be-80f6-f59b13d0c7c5">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="ee34fae1-2e1f-47f9-a534-3182a0fca011">
       <ID>Loan Amount</ID>
       <Name>Loan Amount</Name>
       <Type>Double</Type>
-      <Content>Discretized</Content>
+      <Content>Continuous</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="9736c93a-469b-4ace-9b93-fff42ab19938">
+        <KeyColumn dwd:design-time-name="a65f9936-64d8-4010-9294-7a98ad637817">
           <DataType>Double</DataType>
           <DataSize>-1</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="519eb644-8f30-4056-800b-19bd33bc7ed8">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="620e2eb5-7a46-46a8-a2b2-4463a40c6a8a">
             <TableID>dbo_credit</TableID>
             <ColumnID>loan_amount</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="b9f85117-062b-4cb1-9009-2eb853a4eb03">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="48082515-3c0d-4e32-b7b2-1a1111233483">
       <ID>Loan Limit</ID>
       <Name>Loan Limit</Name>
       <Type>Text</Type>
       <Content>Discrete</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="165074ff-bb07-4ec0-bfe6-b12fd5f1d596">
+        <KeyColumn dwd:design-time-name="330525dc-e18c-4a47-8bb5-3c85f0b71fad">
           <DataType>WChar</DataType>
           <DataSize>255</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="da9ac26e-f3fb-4f10-b6ba-f7d6491fbaae">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="2f3a261e-29ca-4c40-8f52-f68746fc29e1">
             <TableID>dbo_credit</TableID>
             <ColumnID>loan_limit</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="964f46db-f13e-401a-94ae-bfe351cd4273">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="87a1475f-13a4-43d8-9811-7c467cd12af5">
       <ID>Loan Purpose</ID>
       <Name>Loan Purpose</Name>
       <Type>Text</Type>
       <Content>Discrete</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="d3aa5f0f-7892-4fd9-8c50-209548559213">
+        <KeyColumn dwd:design-time-name="47fee610-d607-4563-9788-a5bdf6f9d940">
           <DataType>WChar</DataType>
           <DataSize>255</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="76e539ed-5188-4773-bb71-0e2647806dd6">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="1a819396-2d50-4299-8c2d-397626a66b99">
             <TableID>dbo_credit</TableID>
             <ColumnID>loan_purpose</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="f629c64d-745b-4477-a407-27b156644044">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="6a10caad-8a23-4977-a88b-5785ff518d1b">
       <ID>Loan Type</ID>
       <Name>Loan Type</Name>
       <Type>Text</Type>
       <Content>Discrete</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="e6888597-28aa-4e9e-9dec-b5278af33782">
+        <KeyColumn dwd:design-time-name="8a41d8a9-5adc-4046-95a5-c177df93b4f4">
           <DataType>WChar</DataType>
           <DataSize>255</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="810329b1-d411-4307-8c58-b9acde0e6cbb">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="dd24a29b-d882-46fd-8e1d-ad86526f2826">
             <TableID>dbo_credit</TableID>
             <ColumnID>loan_type</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="02b4afde-ccdb-41ff-a909-6ecbf994ec45">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="95d6da75-e77b-4de9-8129-f9211624296e">
       <ID>LTV</ID>
       <Name>LTV</Name>
       <Type>Double</Type>
       <Content>Continuous</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="8b81397a-a6eb-4eca-b695-db031d4abe38">
+        <KeyColumn dwd:design-time-name="1c1f2409-9595-43c5-882b-2f9e98c7d48f">
           <DataType>Double</DataType>
           <DataSize>-1</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="710d69e9-1c98-4362-a310-b468d7e8d9e0">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="514581ad-66b2-4d40-88c3-8233d7753c51">
             <TableID>dbo_credit</TableID>
             <ColumnID>LTV</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="96498007-a925-409f-8945-a2b57fbbf0e9">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="e6611880-172b-4560-986c-57193a917438">
       <ID>Lump Sum Payment</ID>
       <Name>Lump Sum Payment</Name>
       <Type>Text</Type>
       <Content>Discrete</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="b9df24f1-5f1c-4829-99dc-64173a13e909">
+        <KeyColumn dwd:design-time-name="f5588050-175e-43bf-8e2e-b9e8ecbe5ff1">
           <DataType>WChar</DataType>
           <DataSize>255</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="c17a6d7b-21fe-4062-87af-ef9d88423f2c">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="2d0daf65-815f-41ab-ac3d-d3c4358b715a">
             <TableID>dbo_credit</TableID>
             <ColumnID>lump_sum_payment</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="c83843f2-01c5-49db-97ec-9b7a4e94301d">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="fd9dda2c-b510-4966-8229-ea9a3bedb73a">
       <ID>Neg Ammortization</ID>
       <Name>Neg Ammortization</Name>
       <Type>Text</Type>
       <Content>Discrete</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="1c77450d-e6ac-477a-bd68-38b513414a79">
+        <KeyColumn dwd:design-time-name="68d3935e-bc9e-429c-857f-30dc3e88e27d">
           <DataType>WChar</DataType>
           <DataSize>255</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="1fa5e2a3-963b-4363-8488-751d2c8164ac">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="419fff94-22f7-4f5b-87a0-a1ab474edfc4">
             <TableID>dbo_credit</TableID>
             <ColumnID>Neg_ammortization</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="cbdf760a-af76-48c4-8212-67c8fb6f3329">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="2ddae14e-2956-4ff1-9915-3992fde960c1">
       <ID>Occupancy Type</ID>
       <Name>Occupancy Type</Name>
       <Type>Text</Type>
       <Content>Discrete</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="6badb0e9-14cf-4172-897e-2d022bee5936">
+        <KeyColumn dwd:design-time-name="81748611-97b8-4196-a64c-644064f4f5ea">
           <DataType>WChar</DataType>
           <DataSize>255</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="f8323102-55b4-4543-a094-e73b971d476e">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="5eca2fd4-f392-44fa-b99e-ff0986f44df1">
             <TableID>dbo_credit</TableID>
             <ColumnID>occupancy_type</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="2743d893-314b-46b9-8a22-f390b119279c">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="a6cc69a1-876e-4158-b3a5-3e9e05dfd1ef">
       <ID>Open Credit</ID>
       <Name>Open Credit</Name>
       <Type>Text</Type>
       <Content>Discrete</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="e8f0acec-6c38-4a92-826d-cc816e606608">
+        <KeyColumn dwd:design-time-name="c1564030-81f8-49d0-8cb2-ded72b87d15f">
           <DataType>WChar</DataType>
           <DataSize>255</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="e0fa41d9-c393-4aa1-b9e9-6ff1accc987c">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="3cd6c9ce-3ef1-4c59-b2ec-a6a313de65ad">
             <TableID>dbo_credit</TableID>
             <ColumnID>open_credit</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="d4f69141-123e-404f-8440-dc49d5cf74ce">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="f37521fc-6d07-4af2-a5e9-d63d899b03ee">
       <ID>Property Value</ID>
       <Name>Property Value</Name>
       <Type>Double</Type>
       <Content>Continuous</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="ccdb37ba-0f7b-49c3-b0c3-af0a9c665f0f">
+        <KeyColumn dwd:design-time-name="5de920e7-29dc-4eb2-a8d2-8c9041891f2a">
           <DataType>Double</DataType>
           <DataSize>-1</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="5830e0e3-9a33-4a8b-abc8-8df0723e700f">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="cd688ba9-afed-4954-b418-59e2f9f2fd48">
             <TableID>dbo_credit</TableID>
             <ColumnID>property_value</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="979a9a94-e5cc-4ed9-91c8-b84217f3a931">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="e911e917-c51a-4cff-930e-a8ef10da8d9a">
       <ID>Rate Of Interest</ID>
       <Name>Rate Of Interest</Name>
       <Type>Double</Type>
       <Content>Continuous</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="5fc6efaf-ab47-402d-9c18-55c960698ecd">
+        <KeyColumn dwd:design-time-name="e2dbe465-9bce-4209-a9d7-56d7e3dc64f3">
           <DataType>Double</DataType>
           <DataSize>-1</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="218166fa-2e1b-4904-a677-53db1293bb6c">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="f86dd374-d0f2-478a-ae08-62ae08341341">
             <TableID>dbo_credit</TableID>
             <ColumnID>rate_of_interest</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="f0b413d3-d3f6-4297-9e83-0d859080c58e">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="97eef640-f65d-4398-b99d-d7156f0504d6">
       <ID>Region</ID>
       <Name>Region</Name>
       <Type>Text</Type>
       <Content>Discrete</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="53ee3d95-bb59-43d5-bf67-8ba21cebe4ba">
+        <KeyColumn dwd:design-time-name="15857186-2a2d-4231-aa6c-8a55f47c13a9">
           <DataType>WChar</DataType>
           <DataSize>255</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="f6730161-a721-4bbc-9229-99e5badb1e72">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="4e7e32b7-680a-46b1-8777-57122e885e0a">
             <TableID>dbo_credit</TableID>
             <ColumnID>Region</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="40dfe1cc-3f2e-4570-92c4-cd3644c7c2e2">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="0163720d-171d-42db-982b-550ae105fd79">
       <ID>Secured By</ID>
       <Name>Secured By</Name>
       <Type>Text</Type>
       <Content>Discrete</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="3edbdec8-bd35-4bf7-bdde-017b158aa2d6">
+        <KeyColumn dwd:design-time-name="47b5c0a8-2afe-40b9-ba06-504bf2d095e9">
           <DataType>WChar</DataType>
           <DataSize>255</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="237956aa-3c07-4484-ac63-414a626d6e08">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="a36cdede-e78c-413e-9fa3-5a9041f59544">
             <TableID>dbo_credit</TableID>
             <ColumnID>Secured_by</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="0d065784-2411-42e2-baf0-71ef8b810039">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="b7f5645f-61b6-40f6-8dc1-11711a6b3cf3">
       <ID>Security Type</ID>
       <Name>Security Type</Name>
       <Type>Text</Type>
       <Content>Discrete</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="017dfecf-540a-4224-86aa-625edb315b3b">
+        <KeyColumn dwd:design-time-name="d4d00fb5-1d77-465e-9b24-3e025df1a46b">
           <DataType>WChar</DataType>
           <DataSize>255</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="46a0c74e-7c3f-4700-a0d8-ed6d9b51a863">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="3f745375-8119-4d51-9c66-f8824291fb26">
             <TableID>dbo_credit</TableID>
             <ColumnID>Security_Type</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="e5117370-a667-4a6b-996e-f6e59226cffb">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="103c99f2-b618-4aa1-a0a1-1b79862dc277">
       <ID>Status</ID>
       <Name>Status</Name>
       <Type>Double</Type>
-      <Content>Discrete</Content>
+      <Content>Continuous</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="8447d093-daa6-4ca2-ac35-dd50c76d5c1c">
+        <KeyColumn dwd:design-time-name="d6c249d2-0710-4b37-ba82-5a62a688e5c7">
           <DataType>Double</DataType>
           <DataSize>-1</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="714f9abe-4a00-45f6-a4f6-314def9bbf26">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="90d6ad23-3ab9-42cc-af8c-a87e17a68c8c">
             <TableID>dbo_credit</TableID>
             <ColumnID>Status</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="0c34a234-da13-42cf-b0b8-c74b7d8347fa">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="1b153ccc-b9fd-4280-ad77-e4aec7391e14">
       <ID>Submission Of Application</ID>
       <Name>Submission Of Application</Name>
       <Type>Text</Type>
       <Content>Discrete</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="4a18a269-51b4-4269-bfe8-792e7c06a853">
+        <KeyColumn dwd:design-time-name="0b787d83-9841-4646-a372-ccc0f854f9fb">
           <DataType>WChar</DataType>
           <DataSize>255</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="b757ae70-058d-4b80-ac3c-bde077bf3f19">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="d241cd10-80ac-4cc2-93fc-098f703bdf6d">
             <TableID>dbo_credit</TableID>
             <ColumnID>submission_of_application</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="45a6f64c-73c9-4184-aa4f-b6fbb23c5c9a">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="5e10ca93-e16d-43dd-87e1-1f012acdf3d3">
       <ID>Term</ID>
       <Name>Term</Name>
       <Type>Double</Type>
       <Content>Continuous</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="dc94697d-9aec-4c6d-91b3-31bf86fefa4b">
+        <KeyColumn dwd:design-time-name="33564145-837d-434e-8f76-35301f37b8ee">
           <DataType>Double</DataType>
           <DataSize>-1</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="64310f8b-398e-42a3-8f74-4996ad9b01ba">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="32edb5bb-c2d4-4947-81eb-22eb2e1eff12">
             <TableID>dbo_credit</TableID>
             <ColumnID>term</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="60b57c28-004a-4688-8a6e-3b4b0b13ea77">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="89b758d2-9ffe-4132-b0a8-8b25e12c9b86">
       <ID>Total Units</ID>
       <Name>Total Units</Name>
       <Type>Text</Type>
       <Content>Discrete</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="cfe9950f-b679-44a7-bef4-9860cf35c8a3">
+        <KeyColumn dwd:design-time-name="3192203a-b419-42f0-85ab-de2912795649">
           <DataType>WChar</DataType>
           <DataSize>255</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="eb2c6e47-1dcb-4d8b-b9f3-6838f79bb088">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="6e736f49-948c-451b-b9fe-27499bd847e5">
             <TableID>dbo_credit</TableID>
             <ColumnID>total_units</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="db2fa135-4e57-4f6b-8ff4-f3e6ffd8da7b">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="0c0160c8-26f1-4632-816c-6c7ee3caa136">
       <ID>Upfront Charges</ID>
       <Name>Upfront Charges</Name>
       <Type>Double</Type>
       <Content>Continuous</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="c66da96d-0adb-48e3-b5db-5c38529b5193">
+        <KeyColumn dwd:design-time-name="87d2514d-17f6-41dc-8630-10af33530446">
           <DataType>Double</DataType>
           <DataSize>-1</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="57f287a1-1729-4e97-940c-d61e85280ea8">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="96faaed6-2493-4b26-a246-c73ff3f2b54d">
             <TableID>dbo_credit</TableID>
             <ColumnID>Upfront_charges</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
     </Column>
-    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="0d9419f7-23b7-4e33-b82c-f65845e5ef2e">
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="3a2f188e-4bb3-4581-9ab3-1380cb162b9e">
       <ID>Year</ID>
       <Name>Year</Name>
       <Type>Double</Type>
-      <Content>Discrete</Content>
+      <Content>Continuous</Content>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="2dd7c0af-cc66-44bb-b450-ced9f0d45ae7">
+        <KeyColumn dwd:design-time-name="e360554c-872e-4818-afbd-49377e2b0571">
           <DataType>Double</DataType>
           <DataSize>-1</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="ec357231-0db8-441d-a03d-87b1adbf0baf">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="2e8639c9-08c9-44eb-bd59-647b2b775e11">
             <TableID>dbo_credit</TableID>
             <ColumnID>year</ColumnID>
           </Source>
@@ -623,186 +597,222 @@
     </Column>
   </Columns>
   <MiningModels>
-    <MiningModel dwd:design-time-name="caf2ba6a-c55b-4ee3-b253-d3ff865321f1">
-      <ID>Credit</ID>
-      <Name>Credit</Name>
+    <MiningModel dwd:design-time-name="0bb9948e-ac26-46eb-810a-a11369b700b4">
+      <ID>Decision_Tree_Status</ID>
+      <Name>Decision_Tree_Status</Name>
       <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
       <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
       <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
       <State>Unprocessed</State>
-      <Algorithm>Microsoft_Logistic_Regression</Algorithm>
+      <Algorithm>Microsoft_Decision_Trees</Algorithm>
       <Columns>
-        <Column dwd:design-time-name="990ab57b-12d1-4c89-8a83-8174466b67b5">
+        <Column dwd:design-time-name="7c15f9c9-cf7a-4715-9e64-26d6bdf523ba">
           <ID>Age</ID>
           <Name>Age</Name>
           <SourceColumnID>Age</SourceColumnID>
         </Column>
-        <Column dwd:design-time-name="5a59e03c-1cd7-444e-88ba-48d553cbbdd3">
+        <Column dwd:design-time-name="f9e21c8d-06fe-45ba-89f5-c46ec512b004">
           <ID>Approv In Adv</ID>
           <Name>Approv In Adv</Name>
           <SourceColumnID>Approv In Adv</SourceColumnID>
         </Column>
-        <Column dwd:design-time-name="55c27c5c-a5ba-4826-bbbb-76d3ec918809">
+        <Column dwd:design-time-name="2401b850-5832-492d-ae2c-f32f85758294">
           <ID>Business Or Commercial</ID>
           <Name>Business Or Commercial</Name>
           <SourceColumnID>Business Or Commercial</SourceColumnID>
         </Column>
-        <Column dwd:design-time-name="e73e6216-b181-4429-b411-7f42f96e3ce0">
+        <Column dwd:design-time-name="576df217-1777-49e4-8750-58548e4c4b53">
           <ID>Co-applicant Credit Type</ID>
           <Name>Co-applicant Credit Type</Name>
           <SourceColumnID>Co-applicant Credit Type</SourceColumnID>
         </Column>
-        <Column dwd:design-time-name="beda65ea-509e-47f5-b686-79deedab365f">
+        <Column dwd:design-time-name="b873591b-39ac-4cd3-8b49-57ecf73f4cc3">
           <ID>Construction Type</ID>
           <Name>Construction Type</Name>
           <SourceColumnID>Construction Type</SourceColumnID>
         </Column>
-        <Column dwd:design-time-name="c0e3fa32-9ae7-4464-b93b-2be029eaedb3">
+        <Column dwd:design-time-name="c535c0b6-2170-48e0-8503-cd8edcad7020">
           <ID>Credit Score</ID>
           <Name>Credit Score</Name>
           <SourceColumnID>Credit Score</SourceColumnID>
+          <ModelingFlags>
+            <ModelingFlag>REGRESSOR</ModelingFlag>
+          </ModelingFlags>
         </Column>
-        <Column dwd:design-time-name="45c678fd-5dc4-47fe-bb6c-306316a52e28">
+        <Column dwd:design-time-name="7170d126-b57c-4ef1-9890-ddda5aa69002">
           <ID>Credit Type</ID>
           <Name>Credit Type</Name>
           <SourceColumnID>Credit Type</SourceColumnID>
         </Column>
-        <Column dwd:design-time-name="7a68e9a5-3c8a-4784-8d4e-5d2e81754ebf">
+        <Column dwd:design-time-name="e197bfec-b583-44b0-89c1-da0709f61fa2">
           <ID>Credit Worthiness</ID>
           <Name>Credit Worthiness</Name>
           <SourceColumnID>Credit Worthiness</SourceColumnID>
         </Column>
-        <Column dwd:design-time-name="2566dccd-f2d0-458d-b956-15313175ad68">
+        <Column dwd:design-time-name="d1b16d90-8373-496e-8225-11792ebf25c8">
           <ID>Dtir1</ID>
           <Name>Dtir1</Name>
           <SourceColumnID>Dtir1</SourceColumnID>
+          <ModelingFlags>
+            <ModelingFlag>REGRESSOR</ModelingFlag>
+          </ModelingFlags>
         </Column>
-        <Column dwd:design-time-name="1e7c83d5-4cf8-4789-b01e-711a6498b67e">
+        <Column dwd:design-time-name="e2de4347-4180-4eff-8384-15a9ad4cee04">
           <ID>Gender</ID>
           <Name>Gender</Name>
           <SourceColumnID>Gender</SourceColumnID>
         </Column>
-        <Column dwd:design-time-name="8c2901dd-bced-41a5-be0b-01b3011a236f">
+        <Column dwd:design-time-name="8dcb4413-29f7-430a-9739-4244f764f895">
           <ID>ID</ID>
           <Name>ID</Name>
           <SourceColumnID>ID</SourceColumnID>
           <Usage>Key</Usage>
         </Column>
-        <Column dwd:design-time-name="66ca0f00-06b0-4e69-89f8-50b24c2e7ec1">
+        <Column dwd:design-time-name="de276430-a9ff-4eff-b11c-7ce946b41b5a">
           <ID>Income</ID>
           <Name>Income</Name>
           <SourceColumnID>Income</SourceColumnID>
+          <ModelingFlags>
+            <ModelingFlag>REGRESSOR</ModelingFlag>
+          </ModelingFlags>
         </Column>
-        <Column dwd:design-time-name="5b7d0089-d90e-4899-90e8-1ef41a665261">
+        <Column dwd:design-time-name="191f85e8-3c93-42c7-9a47-13f571508a50">
           <ID>Interest Only</ID>
           <Name>Interest Only</Name>
           <SourceColumnID>Interest Only</SourceColumnID>
         </Column>
-        <Column dwd:design-time-name="8955a368-8a75-4300-8f1a-ab2233987593">
+        <Column dwd:design-time-name="9134bbfa-acd4-47a0-ac59-32dd31adbf8d">
           <ID>Interest Rate Spread</ID>
           <Name>Interest Rate Spread</Name>
           <SourceColumnID>Interest Rate Spread</SourceColumnID>
+          <ModelingFlags>
+            <ModelingFlag>REGRESSOR</ModelingFlag>
+          </ModelingFlags>
         </Column>
-        <Column dwd:design-time-name="35b34f6c-ba36-45c8-832c-e6f4c7265069">
+        <Column dwd:design-time-name="b862806a-e79a-49a5-85bd-bd380a54279b">
           <ID>Loan Amount</ID>
           <Name>Loan Amount</Name>
           <SourceColumnID>Loan Amount</SourceColumnID>
+          <ModelingFlags>
+            <ModelingFlag>REGRESSOR</ModelingFlag>
+          </ModelingFlags>
         </Column>
-        <Column dwd:design-time-name="ca3446ff-bddc-42d7-9afe-706aadf95d47">
+        <Column dwd:design-time-name="77ef6ea4-906e-48a9-ac92-0ef32c067166">
           <ID>Loan Limit</ID>
           <Name>Loan Limit</Name>
           <SourceColumnID>Loan Limit</SourceColumnID>
         </Column>
-        <Column dwd:design-time-name="96bd6753-f593-426f-aa41-4fcd8da66da0">
+        <Column dwd:design-time-name="12cec031-ebad-40e7-8c79-4d7dc0e3c1b8">
           <ID>Loan Purpose</ID>
           <Name>Loan Purpose</Name>
           <SourceColumnID>Loan Purpose</SourceColumnID>
         </Column>
-        <Column dwd:design-time-name="ab2d7432-7d32-4b0c-a1dc-0b2601542589">
+        <Column dwd:design-time-name="21eb3fa7-a684-4dd6-8371-4cbe1678dd68">
           <ID>Loan Type</ID>
           <Name>Loan Type</Name>
           <SourceColumnID>Loan Type</SourceColumnID>
         </Column>
-        <Column dwd:design-time-name="6d271430-0acc-4b24-bff8-1eee508666c7">
+        <Column dwd:design-time-name="ef401864-e2a2-4516-b16b-0d57980c50b7">
           <ID>LTV</ID>
           <Name>LTV</Name>
           <SourceColumnID>LTV</SourceColumnID>
+          <ModelingFlags>
+            <ModelingFlag>REGRESSOR</ModelingFlag>
+          </ModelingFlags>
         </Column>
-        <Column dwd:design-time-name="df379e47-317b-4804-92c7-a3a78c2fd911">
+        <Column dwd:design-time-name="ddbb8e9b-b001-4a9e-81d4-4f9b6ea32337">
           <ID>Lump Sum Payment</ID>
           <Name>Lump Sum Payment</Name>
           <SourceColumnID>Lump Sum Payment</SourceColumnID>
         </Column>
-        <Column dwd:design-time-name="21a69f1c-2125-41bf-9080-32be4185b2f2">
+        <Column dwd:design-time-name="85e24760-9434-4da1-bc31-c9567cf93859">
           <ID>Neg Ammortization</ID>
           <Name>Neg Ammortization</Name>
           <SourceColumnID>Neg Ammortization</SourceColumnID>
         </Column>
-        <Column dwd:design-time-name="36364a67-667b-486d-bb63-2170c5ed717a">
+        <Column dwd:design-time-name="49a126df-5415-4c06-b3ed-6cdebd489bb8">
           <ID>Occupancy Type</ID>
           <Name>Occupancy Type</Name>
           <SourceColumnID>Occupancy Type</SourceColumnID>
         </Column>
-        <Column dwd:design-time-name="f7e0679f-ff8d-459a-9a9c-e8cce4d555df">
+        <Column dwd:design-time-name="973c4e61-8d03-45c3-a7d0-7b984c27c444">
           <ID>Open Credit</ID>
           <Name>Open Credit</Name>
           <SourceColumnID>Open Credit</SourceColumnID>
         </Column>
-        <Column dwd:design-time-name="a4e92fa0-b2ad-4316-a689-b7e1bcbb4977">
+        <Column dwd:design-time-name="341ec2db-1a05-43f2-bd7a-df86a4f5aa41">
           <ID>Property Value</ID>
           <Name>Property Value</Name>
           <SourceColumnID>Property Value</SourceColumnID>
+          <ModelingFlags>
+            <ModelingFlag>REGRESSOR</ModelingFlag>
+          </ModelingFlags>
         </Column>
-        <Column dwd:design-time-name="e881121f-5ef9-456c-8f77-64a41d52ab3b">
+        <Column dwd:design-time-name="e790d930-c881-4cd1-abf3-124fc68122a4">
           <ID>Rate Of Interest</ID>
           <Name>Rate Of Interest</Name>
           <SourceColumnID>Rate Of Interest</SourceColumnID>
+          <ModelingFlags>
+            <ModelingFlag>REGRESSOR</ModelingFlag>
+          </ModelingFlags>
         </Column>
-        <Column dwd:design-time-name="dbdcd69e-7b22-4ba6-aedd-b64cfaef76a0">
+        <Column dwd:design-time-name="9a55c552-fe15-4f9c-8ab5-d38d74222e25">
           <ID>Region</ID>
           <Name>Region</Name>
           <SourceColumnID>Region</SourceColumnID>
         </Column>
-        <Column dwd:design-time-name="e34403ad-8274-4e2b-be0c-8f46f2f25504">
+        <Column dwd:design-time-name="1ff4e30a-26e0-4be2-bae3-02af649b6771">
           <ID>Secured By</ID>
           <Name>Secured By</Name>
           <SourceColumnID>Secured By</SourceColumnID>
         </Column>
-        <Column dwd:design-time-name="e43fec55-fc0e-411d-bd95-0186c1d69f78">
+        <Column dwd:design-time-name="a88f462a-850e-4b01-b590-a770f0ed35f4">
           <ID>Security Type</ID>
           <Name>Security Type</Name>
           <SourceColumnID>Security Type</SourceColumnID>
         </Column>
-        <Column dwd:design-time-name="fda5eab2-b381-4859-904b-8749d8dc0471">
+        <Column dwd:design-time-name="72c4b1b8-daf7-4cc9-bc0a-cafa480e6824">
           <ID>Status</ID>
           <Name>Status</Name>
           <SourceColumnID>Status</SourceColumnID>
-          <Usage>PredictOnly</Usage>
+          <Usage>Predict</Usage>
+          <ModelingFlags>
+            <ModelingFlag>REGRESSOR</ModelingFlag>
+          </ModelingFlags>
         </Column>
-        <Column dwd:design-time-name="26417c6e-c9e6-4764-b149-6366df3e498b">
+        <Column dwd:design-time-name="e2dd819c-5b01-42f3-a183-117124381fe1">
           <ID>Submission Of Application</ID>
           <Name>Submission Of Application</Name>
           <SourceColumnID>Submission Of Application</SourceColumnID>
         </Column>
-        <Column dwd:design-time-name="4fbd0052-1143-4ec2-9b23-7d8c4496f0b8">
+        <Column dwd:design-time-name="edbe852c-60d3-4845-becc-f0033eb69746">
           <ID>Term</ID>
           <Name>Term</Name>
           <SourceColumnID>Term</SourceColumnID>
+          <ModelingFlags>
+            <ModelingFlag>REGRESSOR</ModelingFlag>
+          </ModelingFlags>
         </Column>
-        <Column dwd:design-time-name="381ba6cf-4ec6-4455-8f85-2cf8b0067630">
+        <Column dwd:design-time-name="ea295870-0b5a-4bd5-b9a3-204240250da5">
           <ID>Total Units</ID>
           <Name>Total Units</Name>
           <SourceColumnID>Total Units</SourceColumnID>
         </Column>
-        <Column dwd:design-time-name="729bd864-fb1b-440b-b89f-f8b25c8c1e9c">
+        <Column dwd:design-time-name="8977319c-3653-42f7-a2e1-832778b0b651">
           <ID>Upfront Charges</ID>
           <Name>Upfront Charges</Name>
           <SourceColumnID>Upfront Charges</SourceColumnID>
+          <ModelingFlags>
+            <ModelingFlag>REGRESSOR</ModelingFlag>
+          </ModelingFlags>
         </Column>
-        <Column dwd:design-time-name="a2c4324c-0a77-41ef-8e76-372fd604e39a">
+        <Column dwd:design-time-name="1bc65067-6cce-4724-9342-d76cb8356682">
           <ID>Year</ID>
           <Name>Year</Name>
           <SourceColumnID>Year</SourceColumnID>
+          <ModelingFlags>
+            <ModelingFlag>REGRESSOR</ModelingFlag>
+          </ModelingFlags>
         </Column>
       </Columns>
     </MiningModel>

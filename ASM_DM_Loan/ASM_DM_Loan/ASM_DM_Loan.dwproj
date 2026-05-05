@@ -23,6 +23,14 @@
       <Name>Logistic_Regression_Status.dmm</Name>
       <FullPath>Logistic_Regression_Status.dmm</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>Credit_Decision_Tree.dmm</Name>
+      <FullPath>Credit_Decision_Tree.dmm</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Credit_Clustering.dmm</Name>
+      <FullPath>Credit_Clustering.dmm</FullPath>
+    </ProjectItem>
   </MiningModels>
   <Configurations>
     <Configuration>

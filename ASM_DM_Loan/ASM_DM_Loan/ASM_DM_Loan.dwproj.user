@@ -17,7 +17,7 @@
             <Value xsi:type="xsd:string">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAOaZlPkHhE06U6zWRMMdKTQAAAAAaAAAARQBUAEwAIABNAG8AZABlAGwAIABBAEkAAAAQZgAAAAEAACAAAADfjUYeJa3c0e+kJzdpftS8j8G40qQ11HgNYPVBNsfHfwAAAAAOgAAAAAIAACAAAABfiu3If/DtgmOPBRYt6Hg4MlbmXUp/1VvAlv2tfSXO/RAAAACr8qQ0sHMb83uuKonCgiKiQAAAAIYZpqQuUnXx6uW5zg8LgLmRmK1d0chrpvLc+8OP5Hvttmi6ijViwMLTTPfUf/ZJfUgGUg2E41JQiaeeDQeXvGk=</Value>
           </ConfigurationSetting>
         </UserPasswords>
-        <TargetServer>localhost</TargetServer>
+        <TargetServer>localhost\OLAP</TargetServer>
         <TargetDatabase>ASM_DM_Loan</TargetDatabase>
         <StartObject>
           <ObjectId></ObjectId>
