@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Risk Command Center | Dashboard</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f172a', // Slate 900
+                        secondary: '#334155', // Slate 700
+                        accent: '#3b82f6', // Blue 500
+                        background: '#f8fafc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Apache ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <!-- AlpineJS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <script src="/Scripts/components/app-header.js"></script>
+    <script src="/Scripts/app/dashboard.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        
+        /* Bento Box Styling */
+        .bento-card {
+            background: #ffffff;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -2px rgba(0, 0, 0, 0.02);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+        .bento-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            transform: translateY(-2px);
+            border-color: rgba(203, 213, 225, 0.8);
+        }
+
+        /* Custom Scrollbar for table */
+        .custom-scroll::-webkit-scrollbar { height: 6px; width: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        [x-cloak] { display: none !important; }
+        
+        .pulse-dot {
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+    </style>
+</head>
+
+<body class="text-slate-800" x-data="dashboardApp()" x-init="init()">
+
+    <app-header current-page="dashboard"></app-header>
+
+    <div class="min-h-screen pt-8 pb-16">
+        <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- VIP Header Section -->
+            <div class="mb-8 flex flex-col lg:flex-row lg:justify-between lg:items-end gap-6">
+                <div>
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 pulse-dot"></span>
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-widest">SSAS Engine Active &bull; Data Synced</span>
+                    </div>
+                    <h1 class="text-4xl font-black text-slate-900 tracking-tight">Command Center</h1>
+                    <p class="text-slate-500 mt-1 text-sm font-medium">Hệ thống giám sát và phân tích rủi ro tín dụng thời gian thực.</p>
+                </div>
+                
+                <div class="flex gap-3">
+                    <div class="bg-white border border-slate-200 rounded-xl px-4 py-2.5 flex items-center gap-3 shadow-sm">
+                        <i class="fa-regular fa-clock text-slate-400"></i>
+                        <span class="text-sm font-bold text-slate-700" x-text="new Date().toLocaleDateString('vi-VN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })"></span>
+                    </div>
+                    <button @click="fetchData()" class="bg-slate-900 hover:bg-slate-800 text-white rounded-xl px-5 py-2.5 text-sm font-bold shadow-md transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-rotate-right" :class="loading ? 'fa-spin' : ''"></i> Refresh
+                    </button>
+                </div>
+            </div>
+
+            <!-- Loading & Error Overlays -->
+            <div x-show="loading && !data" class="flex flex-col justify-center items-center py-32" x-cloak>
+                <div class="w-16 h-16 border-4 border-slate-100 border-t-slate-900 rounded-full animate-spin mb-4"></div>
+                <p class="text-slate-500 font-bold tracking-widest uppercase text-xs animate-pulse">Initializing Dashboard...</p>
+            </div>
+
+            <div x-show="error" class="bg-rose-50 border border-rose-200 p-6 rounded-2xl mb-8 flex items-start gap-4" x-cloak>
+                <i class="fa-solid fa-triangle-exclamation text-2xl text-rose-500 mt-1"></i>
+                <div>
+                    <h3 class="text-rose-800 font-bold text-lg mb-1">System Error</h3>
+                    <p class="text-rose-600 font-medium" x-text="error"></p>
+                </div>
+            </div>
+
+            <!-- Bento Box Grid Layout -->
+            <div x-show="!loading && data" x-transition.opacity.duration.700ms x-cloak class="flex flex-col gap-6">
+                
+                <!-- ROW 1: 4 Micro KPI Cards (The "At a Glance" strip) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- KPI 1 -->
+                    <div class="bento-card p-6 flex flex-col justify-between bg-gradient-to-br from-white to-slate-50">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center text-lg">
+                                <i class="fa-solid fa-file-contract"></i>
+                            </div>
+                            <span class="text-xs font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-2 py-1 rounded-md flex items-center gap-1">
+                                <i class="fa-solid fa-arrow-up text-[10px]"></i> 12.5%
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-black text-slate-900 tracking-tight" x-text="data?.TotalApplications || 0"></h3>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Tổng hồ sơ tiếp nhận</p>
+                        </div>
+                    </div>
+
+                    <!-- KPI 2 -->
+                    <div class="bento-card p-6 flex flex-col justify-between">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg">
+                                <i class="fa-solid fa-check-double"></i>
+                            </div>
+                            <span class="text-xs font-bold text-slate-500 bg-slate-100 border border-slate-200 px-2 py-1 rounded-md">
+                                Model: Cây quyết định
+                            </span>
+                        </div>
+                        <div>
+                            <div class="flex items-baseline gap-2">
+                                <h3 class="text-3xl font-black text-slate-900 tracking-tight" x-text="data?.ApprovedCount || 0"></h3>
+                                <span class="text-sm font-bold text-emerald-500" x-text="((data?.ApprovedCount / data?.TotalApplications) * 100).toFixed(1) + '%'"></span>
+                            </div>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Dự đoán phê duyệt</p>
+                        </div>
+                    </div>
+
+                    <!-- KPI 3 -->
+                    <div class="bento-card p-6 flex flex-col justify-between">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-lg">
+                                <i class="fa-solid fa-ban"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-baseline gap-2">
+                                <h3 class="text-3xl font-black text-slate-900 tracking-tight" x-text="data?.RejectedCount || 0"></h3>
+                                <span class="text-sm font-bold text-rose-500" x-text="((data?.RejectedCount / data?.TotalApplications) * 100).toFixed(1) + '%'"></span>
+                            </div>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Hồ sơ từ chối</p>
+                        </div>
+                    </div>
+
+                    <!-- KPI 4 -->
+                    <div class="bento-card p-6 flex flex-col justify-between border-2 border-transparent hover:border-amber-200">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center text-lg">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                            </div>
+                            <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded-md flex items-center gap-1 animate-pulse">
+                                <i class="fa-solid fa-circle text-[6px]"></i> Action Required
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-black text-slate-900 tracking-tight" x-text="data?.HighRiskCount || 0"></h3>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Cảnh báo rủi ro cao</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROW 2: The Core Analysis (8-col + 4-col) -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    
+                    <!-- Massive Area Trend Chart -->
+                    <div class="lg:col-span-8 bento-card p-6 flex flex-col">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h3 class="text-lg font-bold text-slate-900">Xu Hướng Rủi Ro & Phê Duyệt</h3>
+                                <p class="text-xs font-medium text-slate-500 mt-1">Phân tích đa luồng qua Logistic Regression</p>
+                            </div>
+                            <div class="flex gap-2 bg-slate-100 p-1 rounded-lg">
+                                <button class="px-3 py-1.5 bg-white text-slate-800 rounded-md text-xs font-bold shadow-sm">Nhóm Tuổi</button>
+                                <button class="px-3 py-1.5 text-slate-500 hover:text-slate-700 rounded-md text-xs font-bold transition">Thời gian</button>
+                            </div>
+                        </div>
+                        <div id="mainTrendChart" class="w-full flex-grow min-h-[380px]"></div>
+                    </div>
+
+                    <!-- Customer Segmentation Doughnut -->
+                    <div class="lg:col-span-4 bento-card p-6 flex flex-col">
+                        <div class="mb-2">
+                            <h3 class="text-lg font-bold text-slate-900">Phân Cụm Khách Hàng</h3>
+                            <p class="text-xs font-medium text-slate-500 mt-1">SSAS K-Means Model</p>
+                        </div>
+                        <div id="clusterChart" class="w-full flex-grow min-h-[480px]"></div>
+                        
+                        <!-- Quick Stats below doughnut -->
+                        <div class="mt-4 grid grid-cols-2 gap-4">
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Cụm lớn nhất</div>
+                                <div class="font-bold text-slate-800 truncate" x-text="getLargestClusterName()"></div>
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Tổng KH</div>
+                                <div class="font-bold text-slate-800" x-text="data?.ClusterProfiles?.reduce((sum, c) => sum + c.CustomerCount, 0) || 0"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROW 3: Live Decision Stream -->
+                <div class="bento-card overflow-hidden flex flex-col">
+                    <div class="px-8 py-5 border-b border-slate-100 flex justify-between items-center bg-white">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600">
+                                <i class="fa-solid fa-microchip"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-base font-bold text-slate-900">Luồng Xử Lý Quyết Định Theo Thời Gian Thực</h3>
+                                <p class="text-xs font-medium text-slate-500">Live Decision Tree Stream</p>
+                            </div>
+                        </div>
+                        <span class="px-3 py-1 bg-green-50 text-green-600 text-[10px] font-bold uppercase tracking-widest rounded-full border border-green-200 animate-pulse">
+                            Live
+                        </span>
+                    </div>
+                    
+                    <div class="overflow-x-auto custom-scroll p-2">
+                        <table class="w-full text-left text-sm whitespace-nowrap border-separate border-spacing-y-2 px-6 pb-4">
+                            <thead class="text-slate-400 font-bold text-[10px] uppercase tracking-wider">
+                                <tr>
+                                    <th class="px-4 py-2">Mã Tham Chiếu</th>
+                                    <th class="px-4 py-2">Hồ sơ tài chính</th>
+                                    <th class="px-4 py-2 text-center">Xác suất (Prob)</th>
+                                    <th class="px-4 py-2">Khuyến nghị AI</th>
+                                    <th class="px-4 py-2 text-right">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template x-for="(item, index) in (data?.RecentPredictions || [])" :key="index">
+                                    <tr class="bg-slate-50 hover:bg-slate-100 transition-colors rounded-xl shadow-sm">
+                                        <td class="px-4 py-3 rounded-l-xl">
+                                            <div class="font-mono text-slate-900 font-bold" x-text="'#REQ-' + (item.Id || item.ID || (index + 1001))"></div>
+                                            <div class="text-[10px] text-slate-400 mt-0.5" x-text="new Date().toLocaleTimeString()"></div>
+                                        </td>
+                                        <td class="px-4 py-3">
+                                            <div class="flex gap-4">
+                                                <div>
+                                                    <span class="text-[10px] text-slate-400 block mb-0.5">Credit Score</span>
+                                                    <span class="font-bold text-slate-800" x-text="item.CreditScore || '—'"></span>
+                                                </div>
+                                                <div>
+                                                    <span class="text-[10px] text-slate-400 block mb-0.5">Khoản vay</span>
+                                                    <span class="font-bold text-slate-800" x-text="item.LoanAmount ? '$' + Number(item.LoanAmount).toLocaleString() : '—'"></span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 text-center">
+                                            <div class="inline-flex flex-col items-center">
+                                                <div class="text-sm font-black" 
+                                                     :class="(item.ApprovalProbability ?? item.Probability ?? 0) > 0.8 ? 'text-emerald-500' : ((item.ApprovalProbability ?? item.Probability ?? 0) > 0.5 ? 'text-amber-500' : 'text-rose-500')"
+                                                     x-text="(((item.ApprovalProbability ?? item.Probability) || 0) * 100).toFixed(1) + '%'"></div>
+                                                <div class="w-16 h-1 bg-slate-200 rounded-full mt-1 overflow-hidden">
+                                                    <div class="h-full rounded-full" 
+                                                         :class="(item.ApprovalProbability ?? item.Probability ?? 0) > 0.8 ? 'bg-emerald-500' : ((item.ApprovalProbability ?? item.Probability ?? 0) > 0.5 ? 'bg-amber-500' : 'bg-rose-500')"
+                                                         :style="'width: ' + (((item.ApprovalProbability ?? item.Probability) || 0) * 100) + '%'"></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3">
+                                            <span class="px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center gap-1.5"
+                                                :class="{
+                                                    'bg-emerald-100 text-emerald-700': (item.PredictionResult || item.Prediction) === 'APPROVED',
+                                                    'bg-rose-100 text-rose-700': (item.PredictionResult || item.Prediction) === 'REJECTED',
+                                                    'bg-slate-100 text-slate-600': !item.PredictionResult && !item.Prediction
+                                                }">
+                                                <i class="fa-solid" :class="(item.PredictionResult || item.Prediction) === 'APPROVED' ? 'fa-check-circle' : 'fa-times-circle'"></i>
+                                                <span x-text="item.PredictionResult || item.Prediction || 'N/A'"></span>
+                                            </span>
+                                        </td>
+                                        <td class="px-4 py-3 rounded-r-xl text-right">
+                                            <button class="text-slate-400 hover:text-slate-900 transition-colors w-8 h-8 rounded-lg hover:bg-white border border-transparent hover:border-slate-200 shadow-sm">
+                                                <i class="fa-solid fa-chevron-right"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </template>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <!-- We must add a small helper for getLargestClusterName in alpine -->
+    <script>
+        document.addEventListener('alpine:init', () => {
+            // Append helper to the dashboardApp scope if not completely replacing
+        });
+    </script>
+</body>
+</html>

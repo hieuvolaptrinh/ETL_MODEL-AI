@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Segmentation - Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1', // Indigo
+                        secondary: '#8b5cf6', // Violet
+                        surface: '#ffffff',
+                        background: '#f8fafc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="/Scripts/components/app-header.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .glass-panel {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+        }
+        .form-input {
+            width: 100%;
+            background-color: #f1f5f9;
+            border: 1px solid transparent;
+            color: #334155;
+            font-size: 0.875rem;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+        .form-input:focus {
+            background-color: #ffffff;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+
+<body class="text-slate-800" x-data="clusteringApp()" x-init="initCharts()">
+    <app-header current-page="clustering"></app-header>
+
+    <!-- Main Workspace -->
+    <div class="min-h-screen pt-6 pb-12 flex flex-col">
+        <div class="max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8 flex-grow flex flex-col">
+            
+            <!-- Page Title -->
+            <div class="mb-6 flex justify-between items-end">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-indigo-50 text-indigo-600 text-xs font-bold uppercase tracking-wider mb-3">
+                        <i class="fa-solid fa-layer-group"></i> SSAS K-Means Model
+                    </div>
+                    <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Customer Segmentation Engine</h1>
+                    <p class="text-slate-500 text-sm mt-1">Phân tích đa chiều để định vị tệp khách hàng mục tiêu và tìm kiếm sự tương đồng.</p>
+                </div>
+            </div>
+
+            <!-- Horizontal Layout: Top Form, Bottom Visualization -->
+            <div class="flex flex-col xl:flex-row gap-6 flex-grow">
+                
+                <!-- Left/Top Control Panel -->
+                <div class="xl:w-1/3 flex flex-col gap-6">
+                    
+                    <!-- Search/Input Card -->
+                    <div class="glass-panel rounded-2xl p-6 flex-grow">
+                        <h2 class="text-lg font-bold text-slate-800 mb-6 flex items-center justify-between">
+                            <span><i class="fa-solid fa-user-scan text-indigo-500 mr-2"></i> Hồ sơ định vị</span>
+                            <span class="text-xs font-medium text-slate-400 bg-slate-100 px-2 py-1 rounded">Profile Builder</span>
+                        </h2>
+                        
+                        <form @submit.prevent="predictCluster" class="space-y-5">
+                            <!-- Basic Demographics -->
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Thông tin cơ bản</h3>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-600 mb-1.5">Giới tính</label>
+                                        <select x-model="formData.gender" required class="form-input">
+                                            <option value="">Chọn...</option>
+                                            <option value="Male">Nam</option>
+                                            <option value="Female">Nữ</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-600 mb-1.5">Nhóm tuổi</label>
+                                        <select x-model="formData.ageGroup" required class="form-input">
+                                            <option value="">Chọn...</option>
+                                            <option value="25-34">25-34</option>
+                                            <option value="35-44">35-44</option>
+                                            <option value="45-54">45-54</option>
+                                            <option value="55-64">55-64</option>
+                                            <option value="65+">65+</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Financial Profile -->
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Hồ sơ tài chính</h3>
+                                <div class="space-y-4">
+                                    
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-xs font-semibold text-slate-600 mb-1.5 flex justify-between">
+                                                <span>Thu nhập ($)</span>
+                                            </label>
+                                            <input type="number" x-model="formData.income" required min="0" class="form-input" placeholder="Nhập thu nhập...">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-semibold text-slate-600 mb-1.5">Credit Score</label>
+                                            <input type="number" x-model="formData.creditScore" required min="300" max="850" class="form-input" placeholder="300 - 850">
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-600 mb-1.5">Khoản vay ($)</label>
+                                        <input type="number" x-model="formData.loanAmount" required min="0" class="form-input" placeholder="Số tiền muốn vay...">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" :disabled="loading" 
+                                    class="w-full bg-slate-900 hover:bg-indigo-600 text-white font-bold py-3.5 px-4 rounded-xl transition-all duration-300 shadow-md flex items-center justify-center gap-2 group">
+                                <span x-show="!loading">Phân Tích Cụm (Analyze)</span>
+                                <span x-show="loading">Đang xử lý dữ liệu...</span>
+                                <i x-show="!loading" class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                                <i x-show="loading" class="fa-solid fa-circle-notch fa-spin"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Right/Bottom Visualization Workspace -->
+                <div class="xl:w-2/3 flex flex-col gap-6">
+                    
+                    <!-- Result Status Bar (Empty State) -->
+                    <div x-show="!result" class="glass-panel rounded-2xl flex-grow flex flex-col items-center justify-center p-12 text-center border-dashed border-2 border-slate-200 bg-slate-50/50">
+                        <div class="w-24 h-24 mb-6 rounded-full bg-indigo-50 text-indigo-300 flex items-center justify-center text-4xl">
+                            <i class="fa-solid fa-radar text-indigo-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-700 mb-2">Workspace Sẵn Sàng</h3>
+                        <p class="text-slate-500 max-w-md">Nhập dữ liệu khách hàng bên trái để hệ thống K-Means phân tích, đặt khách hàng vào không gian đa chiều và tìm kiếm các đối tượng tương đồng.</p>
+                    </div>
+
+                    <!-- Result Dashboard (Data State) -->
+                    <template x-if="result">
+                        <div class="flex flex-col gap-6 h-full" x-transition.duration.500ms>
+                            
+                            <!-- Primary Result Card -->
+                            <div class="glass-panel rounded-2xl p-6 relative overflow-hidden flex-shrink-0">
+                                <div class="absolute right-0 top-0 w-32 h-32 bg-indigo-50 rounded-bl-full opacity-50 -z-10"></div>
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Cụm được định vị</p>
+                                        <h2 class="text-3xl font-black text-slate-800" x-text="'Cluster ' + result.Cluster"></h2>
+                                        <p class="text-sm text-indigo-600 font-bold mt-1" x-text="result.Description"></p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Độ tin cậy K-Means</p>
+                                        <h3 class="text-3xl font-black text-slate-800" x-text="(result.Probability * 100).toFixed(2) + '%'"></h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 flex-grow">
+                                <!-- ECharts Visualization Area -->
+                                <div class="lg:col-span-3 glass-panel rounded-2xl p-6 flex flex-col">
+                                    <div class="flex justify-between items-center mb-4">
+                                        <h3 class="text-base font-bold text-slate-800">Bản đồ Định vị Radar</h3>
+                                        <span class="px-2 py-1 text-[10px] font-bold uppercase rounded bg-indigo-50 text-indigo-600 border border-indigo-100">K-Means</span>
+                                    </div>
+                                    <div id="radarChart" class="w-full flex-grow min-h-[250px]"></div>
+                                </div>
+
+                                <!-- Cluster Profiles List -->
+                                <div class="lg:col-span-2 glass-panel rounded-2xl p-6 overflow-y-auto max-h-[350px] hide-scrollbar">
+                                    <h3 class="text-base font-bold text-slate-800 mb-4">Danh sách các Cụm</h3>
+                                    <div class="space-y-3">
+                                        <template x-for="c in clusterList" :key="c.id">
+                                            <div class="p-3 rounded-lg border transition-all" 
+                                                 :class="result.Cluster === c.id ? 'bg-indigo-50 border-indigo-200' : 'bg-slate-50 border-slate-100'">
+                                                <div class="flex justify-between items-center mb-1">
+                                                    <span class="text-sm font-bold text-slate-800" x-text="'Cluster ' + c.id"></span>
+                                                    <span x-show="result.Cluster === c.id" class="flex h-2 w-2 relative">
+                                                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                                                      <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                                                    </span>
+                                                </div>
+                                                <p class="text-xs text-slate-500" x-text="c.desc"></p>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Similar Customers Table -->
+                            <div class="glass-panel rounded-2xl overflow-hidden flex-shrink-0">
+                                <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                                    <div>
+                                        <h3 class="text-base font-bold text-slate-800"><i class="fa-solid fa-users-viewfinder text-indigo-500 mr-2"></i> Khách hàng tương đồng (Similar Profiles)</h3>
+                                        <p class="text-xs text-slate-500 mt-1">Các hồ sơ thuộc cùng Cụm có điểm tín dụng và hành vi vay tương tự.</p>
+                                    </div>
+                                </div>
+                                <div class="overflow-x-auto">
+                                    <table class="w-full text-left text-sm whitespace-nowrap">
+                                        <thead class="bg-slate-50 text-slate-500 font-bold text-[10px] uppercase tracking-wider">
+                                            <tr>
+                                                <th class="px-6 py-3">Mã KH</th>
+                                                <th class="px-6 py-3">Nhóm Tuổi</th>
+                                                <th class="px-6 py-3">Credit Score</th>
+                                                <th class="px-6 py-3">Thu nhập / Khoản vay</th>
+                                                <th class="px-6 py-3 text-right">Khoảng cách L2</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-slate-100 bg-white">
+                                            <template x-for="sim in similarCustomers" :key="sim.id">
+                                                <tr class="hover:bg-slate-50 transition-colors">
+                                                    <td class="px-6 py-3 font-mono text-slate-500 font-medium" x-text="'#' + sim.id"></td>
+                                                    <td class="px-6 py-3 text-slate-700" x-text="sim.age"></td>
+                                                    <td class="px-6 py-3 font-bold text-indigo-600" x-text="sim.score"></td>
+                                                    <td class="px-6 py-3">
+                                                        <span class="text-slate-800 font-medium" x-text="'$' + sim.income"></span> 
+                                                        <span class="text-slate-400 mx-1">/</span> 
+                                                        <span class="text-slate-600" x-text="'$' + sim.loan"></span>
+                                                    </td>
+                                                    <td class="px-6 py-3 text-right font-mono text-xs text-slate-400" x-text="sim.distance.toFixed(4)"></td>
+                                                </tr>
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </template>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Application -->
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('clusteringApp', () => ({
+                loading: false,
+                result: null,
+                radarChartInstance: null,
+                formData: {
+                    gender: '',
+                    ageGroup: '',
+                    creditScore: 650,
+                    income: 5000,
+                    loanAmount: 150000
+                },
+                clusterList: [],
+                similarCustomers: [],
+
+                initCharts() {
+                    // Load cluster profiles from API
+                    this.loadClusterProfiles();
+                    
+                    // Watch for result changes to render chart
+                    this.$watch('result', (value) => {
+                        if (value) {
+                            setTimeout(() => { this.renderRadarChart(); }, 100);
+                        }
+                    });
+                },
+
+                async loadClusterProfiles() {
+                    try {
+                        const response = await fetch('/api/clustering/profiles');
+                        if (response.ok) {
+                            const profiles = await response.json();
+                            // Map profiles to cluster list with descriptions
+                            this.clusterList = profiles.map(p => ({
+                                id: p.ClusterID,
+                                desc: `${p.ClusterDescription} - ${p.CustomerCount.toLocaleString()} khách hàng`,
+                                avgCredit: p.AvgCreditScore,
+                                avgIncome: p.AvgIncome,
+                                avgLoan: p.AvgLoanAmount,
+                                count: p.CustomerCount
+                            }));
+                        }
+                    } catch (error) {
+                        console.error('Error loading cluster profiles:', error);
+                        // Fallback to default 4 clusters if API fails
+                        this.clusterList = [
+                            { id: 1, desc: 'Premium - Rủi ro thấp, Thu nhập cao, Nhu cầu vay lớn.' },
+                            { id: 2, desc: 'Standard - Rủi ro trung bình, Thu nhập ổn định, Vay tiêu dùng.' },
+                            { id: 3, desc: 'Subprime - Rủi ro cao, Điểm tín dụng thấp.' },
+                            { id: 4, desc: 'Emerging - Trẻ tuổi, Thu nhập đang tăng, Vay mua nhà lần đầu.' }
+                        ];
+                    }
+                },
+
+                generateSimilarCustomers(clusterId, income, score, loanAmount) {
+                    const purposes = ['Mua nhà', 'Kinh doanh', 'Vay tiêu dùng', 'Khác'];
+                    const ages = ['25-34', '35-44', '45-54'];
+                    
+                    return Array.from({ length: 4 }).map((_, i) => ({
+                        id: Math.floor(Math.random() * 90000) + 10000,
+                        age: ages[Math.floor(Math.random() * ages.length)],
+                        score: Math.max(300, Math.min(850, score + (Math.floor(Math.random() * 40) - 20))),
+                        income: Math.max(1000, income + (Math.floor(Math.random() * 2000) - 1000)),
+                        loan: Math.max(5000, loanAmount + (Math.floor(Math.random() * 20000) - 10000)),
+                        purpose: purposes[Math.floor(Math.random() * purposes.length)],
+                        distance: 0.01 + (Math.random() * 0.05) // Mock L2 distance
+                    })).sort((a, b) => a.distance - b.distance);
+                },
+
+                async predictCluster() {
+                    this.loading = true;
+                    // Simulate network request
+                    setTimeout(() => {
+                        // Mock Result based on input
+                        const score = parseInt(this.formData.creditScore);
+                        const income = parseInt(this.formData.income);
+                        const loan = parseInt(this.formData.loanAmount);
+                        
+                        let cluster = 2;
+                        let desc = "Standard - Rủi ro trung bình, Thu nhập ổn định, Vay tiêu dùng.";
+                        let prob = 0.75;
+
+                        if (score < 550) { 
+                            cluster = 3; desc = "Subprime - Rủi ro cao, Điểm tín dụng thấp."; prob = 0.88; 
+                        } else if (income > 12000 && score > 700) { 
+                            cluster = 1; desc = "Premium - Rủi ro thấp, Thu nhập cao, Nhu cầu vay lớn."; prob = 0.95; 
+                        } else if (this.formData.ageGroup === '25-34' && loan > 100000) {
+                            cluster = 4; desc = "Emerging - Trẻ tuổi, Thu nhập đang tăng, Vay mua nhà lần đầu."; prob = 0.82;
+                        }
+
+                        this.result = {
+                            Cluster: cluster,
+                            Description: desc,
+                            Probability: prob,
+                            Score: score,
+                            Income: income,
+                            Loan: loan
+                        };
+                        
+                        // Generate mock similar customers
+                        this.similarCustomers = this.generateSimilarCustomers(cluster, income, score, loan);
+
+                        this.loading = false;
+                    }, 800);
+                },
+
+                renderRadarChart() {
+                    const chartDom = document.getElementById('radarChart');
+                    if (!chartDom) return;
+
+                    if (this.radarChartInstance) {
+                        this.radarChartInstance.dispose();
+                    }
+
+                    this.radarChartInstance = echarts.init(chartDom);
+                    
+                    // Normalize data for radar chart (mock normalization)
+                    const normalizedScore = (this.result.Score / 850) * 100;
+                    const normalizedIncome = Math.min((this.result.Income / 15000) * 100, 100);
+                    const normalizedLoan = Math.min((this.result.Loan / 500000) * 100, 100);
+                    const probScore = this.result.Probability * 100;
+                    
+                    const option = {
+                        color: ['#6366f1', '#cbd5e1'],
+                        tooltip: { trigger: 'item' },
+                        legend: {
+                            bottom: 0,
+                            data: ['Khách hàng hiện tại', 'Trung bình Cluster'],
+                            textStyle: { fontFamily: 'Inter', color: '#64748b', fontSize: 10 }
+                        },
+                        radar: {
+                            indicator: [
+                                { name: 'Credit Score', max: 100 },
+                                { name: 'Thu nhập', max: 100 },
+                                { name: 'Độ lớn Khoản vay', max: 100 },
+                                { name: 'Độ khớp (Prob)', max: 100 },
+                                { name: 'Tính ổn định', max: 100 }
+                            ],
+                            splitNumber: 4,
+                            axisName: { color: '#475569', fontFamily: 'Inter', fontWeight: 600, padding: [3, 5], fontSize: 11 },
+                            splitLine: { lineStyle: { color: '#e2e8f0' } },
+                            splitArea: { show: true, areaStyle: { color: ['#f8fafc', '#ffffff'] } },
+                            axisLine: { lineStyle: { color: '#e2e8f0' } }
+                        },
+                        series: [
+                            {
+                                name: 'Profile Analysis',
+                                type: 'radar',
+                                data: [
+                                    {
+                                        value: [normalizedScore, normalizedIncome, normalizedLoan, probScore, 75],
+                                        name: 'Khách hàng hiện tại',
+                                        areaStyle: { color: 'rgba(99, 102, 241, 0.4)' },
+                                        lineStyle: { width: 3 },
+                                        itemStyle: { color: '#6366f1' }
+                                    },
+                                    {
+                                        value: [70, 60, 50, 85, 65], // Mock baseline
+                                        name: 'Trung bình Cluster',
+                                        areaStyle: { color: 'rgba(203, 213, 225, 0.2)' },
+                                        lineStyle: { width: 2, type: 'dashed' },
+                                        itemStyle: { color: '#94a3b8' }
+                                    }
+                                ]
+                            }
+                        ]
+                    };
+
+                    this.radarChartInstance.setOption(option);
+                    window.addEventListener('resize', () => { this.radarChartInstance.resize(); });
+                }
+            }));
+        });
+    </script>
+</body>
+</html>
