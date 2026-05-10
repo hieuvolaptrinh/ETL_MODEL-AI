@@ -23,33 +23,33 @@ namespace ASM_DM_Loan_UI.Services
         {
             string dmxQuery = $@"
                 SELECT 
-                    PredictProbability([Status], 0) AS [Probability_Approved],
-                    PredictProbability([Status], 1) AS [Probability_Rejected],
+                    [Loan Limit],
+                    PredictProbability([Loan Limit], 'cf75') AS [Probability_High],
+                    PredictProbability([Loan Limit], 'ncf75') AS [Probability_Low],
                     CASE 
-                        WHEN PredictProbability([Status], 0) > 0.5 THEN 'APPROVED'
+                        WHEN [Loan Limit] = 'cf75' THEN 'APPROVED'
                         ELSE 'REJECTED'
                     END AS [Prediction_Result],
                     CASE 
-                        WHEN PredictProbability([Status], 0) >= 0.7 THEN 'HIGH CONFIDENCE'
-                        WHEN PredictProbability([Status], 0) >= 0.5 THEN 'MODERATE CONFIDENCE'
+                        WHEN PredictProbability([Loan Limit], 'cf75') >= 0.7 THEN 'HIGH CONFIDENCE'
+                        WHEN PredictProbability([Loan Limit], 'cf75') >= 0.5 THEN 'MODERATE CONFIDENCE'
                         ELSE 'LOW CONFIDENCE'
                     END AS [Confidence_Level],
                     CASE 
-                        WHEN PredictProbability([Status], 1) >= 0.7 THEN 'HIGH RISK'
-                        WHEN PredictProbability([Status], 1) >= 0.4 THEN 'MEDIUM RISK'
+                        WHEN [Loan Limit] = 'ncf75' THEN 'HIGH RISK'
+                        WHEN PredictProbability([Loan Limit], 'ncf75') >= 0.4 THEN 'MEDIUM RISK'
                         ELSE 'LOW RISK'
                     END AS [Risk_Category]
                 FROM 
-                    [Decision_Tree_Status]
+                    [Credit_Decision_Tree]
                 NATURAL PREDICTION JOIN
                     (SELECT 
-                        '{input.Gender}' AS [Gender],
-                        '{input.AgeGroup}' AS [Age],
                         {input.CreditScore} AS [Credit Score],
                         {input.Income} AS [Income],
-                        {input.LoanAmount} AS [Loan Amount],
                         {input.LTV} AS [LTV],
-                        {input.DTI} AS [Dtir1]
+                        {input.DTI} AS [Dtir1],
+                        {input.PropertyValue} AS [Property Value],
+                        '{input.LoanPurpose}' AS [Loan Purpose]
                     ) AS t";
 
             try
@@ -61,15 +61,15 @@ namespace ASM_DM_Loan_UI.Services
                     DataRow row = dt.Rows[0];
                     return new DecisionTreePredictionResult
                     {
-                        Gender = input.Gender,
-                        AgeGroup = input.AgeGroup,
                         CreditScore = input.CreditScore,
                         Income = input.Income,
                         LoanAmount = input.LoanAmount,
+                        PropertyValue = input.PropertyValue,
                         LTV = input.LTV,
                         DTI = input.DTI,
-                        ApprovalProbability = Convert.ToDouble(row["Probability_Approved"]),
-                        RejectionProbability = Convert.ToDouble(row["Probability_Rejected"]),
+                        LoanPurpose = input.LoanPurpose,
+                        ApprovalProbability = Convert.ToDouble(row["Probability_High"]),
+                        RejectionProbability = Convert.ToDouble(row["Probability_Low"]),
                         PredictionResult = row["Prediction_Result"].ToString(),
                         ConfidenceLevel = row["Confidence_Level"].ToString(),
                         RiskCategory = row["Risk_Category"].ToString()
@@ -123,13 +123,13 @@ namespace ASM_DM_Loan_UI.Services
             
             return new DecisionTreePredictionResult
             {
-                Gender = input.Gender,
-                AgeGroup = input.AgeGroup,
                 CreditScore = input.CreditScore,
                 Income = input.Income,
                 LoanAmount = input.LoanAmount,
+                PropertyValue = input.PropertyValue,
                 LTV = input.LTV,
                 DTI = input.DTI,
+                LoanPurpose = input.LoanPurpose,
                 ApprovalProbability = approvalProb,
                 RejectionProbability = rejectionProb,
                 PredictionResult = approvalProb > 0.5 ? "APPROVED" : "REJECTED",

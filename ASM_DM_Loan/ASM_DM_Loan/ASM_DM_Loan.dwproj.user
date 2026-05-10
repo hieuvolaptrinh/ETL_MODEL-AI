@@ -7,17 +7,15 @@
           <ConfigurationSetting>
             <Id>ETL Model AI</Id>
             <Name>ETL Model AI</Name>
-            <Value xsi:type="xsd:string">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA9xZ1zklTk0i2qcCFNi94ngAAAAAaAAAARQBUAEwAIABNAG8AZABlAGwAIABBAEkAAAAQZgAAAAEAACAAAADjxn8HR+AWWtuJTiIzATS0GA2tMGjotZ/3C+yzCeGv1wAAAAAOgAAAAAIAACAAAABdnoWk6Ylms08hkYx/dHeXfE82c0toS8XjN6O98plaIxAAAAD5RpqdHS9TC0cHIQZ4seCzQAAAAKQq7w9Vw92YIY23lxz0BJ5DashIsUlDxhXuW3yCqWDqzWAHAREFCrK0j6tdfdYqzdVyXTNZadnuN80NkLL0J9s=</Value>
           </ConfigurationSetting>
         </UserIDs>
         <UserPasswords>
           <ConfigurationSetting>
             <Id>ETL Model AI</Id>
             <Name>ETL Model AI</Name>
-            <Value xsi:type="xsd:string">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA9xZ1zklTk0i2qcCFNi94ngAAAAAaAAAARQBUAEwAIABNAG8AZABlAGwAIABBAEkAAAAQZgAAAAEAACAAAAAL8x3OYt4wusr6C8SGasEJvTR+loJnogbn1FhAT7J06wAAAAAOgAAAAAIAACAAAAATZ7hzn9grVVrMRxtdC0eqHHHN9RTEj1RGXIP7jbiFSRAAAABJY/MnJRuo+vUUmOmyorb2QAAAAEZkotaYOZQO+RSq3hBg0qlrUgGFJg4sHx8yVIYJkaHzmzn0RW2g2oDLPmcNJHfL8NFukCZLSUtHcVRcjecTD1Y=</Value>
           </ConfigurationSetting>
         </UserPasswords>
-        <TargetServer>localhost</TargetServer>
+        <TargetServer>localhost\OLAP</TargetServer>
         <TargetDatabase>ASM_DM_Loan</TargetDatabase>
         <StartObject>
           <ObjectId></ObjectId>

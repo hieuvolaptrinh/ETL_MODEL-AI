@@ -32,29 +32,28 @@
         body { 
             font-family: 'Inter', sans-serif; 
             background-color: #f8fafc;
-            /* Subtle grid background for "node" feel */
-            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
-            background-size: 20px 20px;
         }
-        .card-shadow {
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+        .glass-panel {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
         }
         .form-input {
             width: 100%;
-            border-bottom: 2px solid #e2e8f0;
-            background: transparent;
-            color: #1e293b;
-            font-size: 1rem;
-            font-weight: 500;
-            padding: 0.5rem 0;
+            background-color: #f1f5f9;
+            border: 1px solid transparent;
+            color: #334155;
+            font-size: 0.875rem;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
             outline: none;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
         .form-input:focus {
-            border-bottom-color: #3b82f6;
+            background-color: #ffffff;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
-        .form-input::placeholder { color: #cbd5e1; font-weight: 400; }
-        
         [x-cloak] { display: none !important; }
     </style>
 </head>
@@ -62,124 +61,163 @@
 <body class="text-slate-800" x-data="predictionApp()">
     <app-header current-page="prediction"></app-header>
 
-    <div class="min-h-screen pt-12 pb-20 flex flex-col items-center justify-center relative">
-        
-        <!-- Header Text -->
-        <div class="text-center mb-10 z-10" x-show="step === 'input'">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-widest mb-4 border border-blue-100">
-                <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-                Rules-based AI Prediction
-            </div>
-            <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight mb-2">Decision Tree Node</h1>
-            <p class="text-slate-500 font-medium">Hệ thống suy luận logic để đưa ra quyết định thẩm định chính xác.</p>
-        </div>
-
-        <!-- Main Card Wrapper -->
-        <div class="w-full max-w-2xl bg-white rounded-3xl card-shadow border border-slate-200 overflow-hidden relative z-10 transition-all duration-700"
-             :class="step === 'result' ? 'max-w-4xl' : 'max-w-2xl'">
+    <!-- Main Workspace -->
+    <div class="min-h-screen pt-6 pb-12 flex flex-col">
+        <div class="max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8 flex-grow flex flex-col">
             
-            <!-- Step 1: Input Form -->
-            <div x-show="step === 'input'" x-transition:enter="transition ease-out duration-300 delay-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-4" class="p-10">
-                <form @submit.prevent="simulatePrediction">
-                    <div class="space-y-8">
-                        
-                        <!-- Row 1 -->
-                        <div class="grid grid-cols-2 gap-8">
-                            <div>
-                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Tuổi</label>
-                                <select x-model="form.AgeGroup" required class="form-input">
-                                    <option value="" disabled selected>Chọn nhóm tuổi</option>
-                                    <option value="25-34">25-34</option>
-                                    <option value="35-44">35-44</option>
-                                    <option value="45-54">45-54</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Thu nhập ($)</label>
-                                <input type="number" x-model="form.Income" required min="0" placeholder="VD: 5000" class="form-input">
-                            </div>
-                        </div>
-
-                        <!-- Row 2 -->
-                        <div class="grid grid-cols-2 gap-8">
-                            <div>
-                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Credit Score</label>
-                                <input type="number" x-model="form.CreditScore" required min="300" max="850" placeholder="300 - 850" class="form-input">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Khoản vay ($)</label>
-                                <input type="number" x-model="form.LoanAmount" required min="0" placeholder="VD: 150000" class="form-input">
-                            </div>
-                        </div>
-
-                        <!-- Row 3 -->
-                        <div>
-                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Tài sản đảm bảo (LTV %)</label>
-                            <div class="flex items-center gap-4">
-                                <input type="range" x-model="form.LTV" min="0" max="100" class="w-full accent-blue-500">
-                                <span class="font-bold text-slate-700 w-12 text-right" x-text="form.LTV + '%'"></span>
-                            </div>
-                            <p class="text-[10px] text-slate-400 mt-1">Tỷ lệ Loan-to-Value (Khoản vay / Giá trị tài sản)</p>
-                        </div>
+            <!-- Page Title -->
+            <div class="mb-6 flex justify-between items-end">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider mb-3">
+                        <i class="fa-solid fa-sitemap"></i> SSAS Decision Tree Model
                     </div>
-
-                    <div class="mt-12 flex justify-end">
-                        <button type="submit" :disabled="loading" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition-all flex items-center gap-3">
-                            <span x-show="!loading">Thực thi Model</span>
-                            <span x-show="loading">Đang suy luận...</span>
-                            <i x-show="!loading" class="fa-solid fa-play text-sm"></i>
-                            <i x-show="loading" class="fa-solid fa-circle-notch fa-spin text-sm"></i>
-                        </button>
-                    </div>
-                </form>
+                    <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Decision Tree Prediction Engine</h1>
+                    <p class="text-slate-500 text-sm mt-1">Hệ thống suy luận logic để đưa ra quyết định thẩm định chính xác dựa trên cây quyết định.</p>
+                </div>
             </div>
 
-            <!-- Step 2: Result & Tree View -->
-            <div x-show="step === 'result'" x-cloak x-transition:enter="transition ease-out duration-500 delay-300" x-transition:enter-start="opacity-0 translate-y-8" x-transition:enter-end="opacity-100 translate-y-0" class="flex flex-col md:flex-row h-full">
+            <!-- Horizontal Layout: Left Form, Right Visualization -->
+            <div class="flex flex-col xl:flex-row gap-6 flex-grow">
                 
-                <!-- Result Summary Sidebar -->
-                <div class="md:w-1/3 bg-slate-900 p-8 text-white flex flex-col justify-between">
-                    <div>
-                        <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-white/10 text-slate-300 text-[10px] font-bold uppercase tracking-wider mb-6">
-                            ID: #TRX-<span x-text="Math.floor(Math.random()*9000)+1000"></span>
-                        </div>
+                <!-- Left Control Panel -->
+                <div class="xl:w-1/3 flex flex-col gap-6">
+                    
+                    <!-- Input Card -->
+                    <div class="glass-panel rounded-2xl p-6 flex-grow">
+                        <h2 class="text-lg font-bold text-slate-800 mb-6 flex items-center justify-between">
+                            <span><i class="fa-solid fa-file-invoice-dollar text-blue-500 mr-2"></i> Hồ sơ vay</span>
+                            <span class="text-xs font-medium text-slate-400 bg-slate-100 px-2 py-1 rounded">Loan Profile</span>
+                        </h2>
                         
-                        <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-1">Quyết định AI</h3>
-                        <!-- Result Badge -->
-                        <div class="mt-2 mb-8">
-                            <div x-show="result.Status === 'APPROVED'" class="text-4xl font-black text-emerald-400 flex items-center gap-3">
-                                <i class="fa-solid fa-check-circle"></i> DUYỆT
-                            </div>
-                            <div x-show="result.Status === 'REJECTED'" class="text-4xl font-black text-rose-400 flex items-center gap-3">
-                                <i class="fa-solid fa-times-circle"></i> TỪ CHỐI
-                            </div>
-                        </div>
-
-                        <div class="space-y-4">
-                            <div>
-                                <p class="text-xs text-slate-400 mb-1">Xác suất chính xác</p>
-                                <div class="w-full bg-slate-800 rounded-full h-1.5 mb-1">
-                                    <div class="bg-blue-500 h-1.5 rounded-full" :style="'width: ' + (result.Probability * 100) + '%'"></div>
+                        <form @submit.prevent="simulatePrediction" class="space-y-5">
+                            <!-- Credit & Income -->
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Thông tin tín dụng</h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-600 mb-1.5">Credit Score</label>
+                                        <input type="number" x-model="form.CreditScore" required min="300" max="850" placeholder="300 - 850" class="form-input">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-600 mb-1.5">Thu nhập ($)</label>
+                                        <input type="number" x-model="form.Income" required min="0" placeholder="VD: 5000" class="form-input">
+                                    </div>
                                 </div>
-                                <p class="text-sm font-bold" x-text="(result.Probability * 100).toFixed(1) + '%'"></p>
                             </div>
-                            <div>
-                                <p class="text-xs text-slate-400 mb-1">Lý do chính (Key Node)</p>
-                                <p class="text-sm font-bold text-slate-200" x-text="result.Reason"></p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <button @click="reset()" class="w-full mt-8 py-3 rounded-lg border border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white transition-colors text-sm font-bold flex justify-center items-center gap-2">
-                        <i class="fa-solid fa-rotate-left"></i> Phân tích lại
-                    </button>
+                            <!-- Loan Details -->
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Chi tiết khoản vay</h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-600 mb-1.5">Khoản vay ($)</label>
+                                        <input type="number" x-model="form.LoanAmount" required min="0" placeholder="VD: 150000" class="form-input">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-600 mb-1.5">Giá trị tài sản ($)</label>
+                                        <input type="number" x-model="form.PropertyValue" required min="0" placeholder="VD: 300000" class="form-input">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-600 mb-1.5">Mục đích vay</label>
+                                        <select x-model="form.LoanPurpose" required class="form-input">
+                                            <option value="" disabled selected>Chọn mục đích</option>
+                                            <option value="Home">Mua nhà</option>
+                                            <option value="Refinance">Tái cấp vốn</option>
+                                            <option value="CashOut">Rút tiền mặt</option>
+                                            <option value="Other">Khác</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Ratios -->
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Tỷ lệ rủi ro</h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-600 mb-1.5 flex justify-between">
+                                            <span>LTV (Loan-to-Value)</span>
+                                            <span class="font-bold text-blue-600" x-text="form.LTV + '%'"></span>
+                                        </label>
+                                        <input type="range" x-model="form.LTV" min="0" max="100" class="w-full accent-blue-500">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-600 mb-1.5">DTI (Debt-to-Income) %</label>
+                                        <input type="number" x-model="form.DTI" required min="0" max="100" placeholder="VD: 35" class="form-input">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" :disabled="loading" 
+                                    class="w-full bg-slate-900 hover:bg-blue-600 text-white font-bold py-3.5 px-4 rounded-xl transition-all duration-300 shadow-md flex items-center justify-center gap-2 group">
+                                <span x-show="!loading">Thực thi Model</span>
+                                <span x-show="loading">Đang suy luận...</span>
+                                <i x-show="!loading" class="fa-solid fa-play group-hover:translate-x-1 transition-transform"></i>
+                                <i x-show="loading" class="fa-solid fa-circle-notch fa-spin"></i>
+                            </button>
+                        </form>
+                    </div>
                 </div>
 
-                <!-- ECharts Decision Tree Diagram -->
-                <div class="md:w-2/3 p-8 bg-white flex flex-col">
-                    <h3 class="text-lg font-bold text-slate-800 mb-1">Luồng Logic Cây Quyết Định</h3>
-                    <p class="text-xs text-slate-500 mb-6">Mô phỏng đường đi của dữ liệu qua các Node quy tắc.</p>
-                    <div id="treeChart" class="w-full flex-grow min-h-[400px]"></div>
+                <!-- Right Visualization Workspace -->
+                <div class="xl:w-2/3 flex flex-col gap-6">
+                    
+                    <!-- Empty State -->
+                    <div x-show="!result" class="glass-panel rounded-2xl flex-grow flex flex-col items-center justify-center p-12 text-center border-dashed border-2 border-slate-200 bg-slate-50/50">
+                        <div class="w-24 h-24 mb-6 rounded-full bg-blue-50 text-blue-300 flex items-center justify-center text-4xl">
+                            <i class="fa-solid fa-sitemap text-blue-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-700 mb-2">Decision Tree Workspace</h3>
+                        <p class="text-slate-500 max-w-md">Nhập thông tin hồ sơ vay bên trái để hệ thống Decision Tree phân tích và đưa ra quyết định duyệt/từ chối khoản vay.</p>
+                    </div>
+
+                    <!-- Result Dashboard -->
+                    <template x-if="result">
+                        <div class="flex flex-col gap-6 h-full" x-transition.duration.500ms>
+                            
+                            <!-- Primary Result Card -->
+                            <div class="glass-panel rounded-2xl p-6 relative overflow-hidden flex-shrink-0">
+                                <div class="absolute right-0 top-0 w-32 h-32 rounded-bl-full opacity-50 -z-10"
+                                     :class="result.Status === 'APPROVED' ? 'bg-emerald-50' : 'bg-rose-50'"></div>
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Quyết định AI</p>
+                                        <div x-show="result.Status === 'APPROVED'" class="text-3xl font-black text-emerald-600 flex items-center gap-3">
+                                            <i class="fa-solid fa-check-circle"></i> DUYỆT
+                                        </div>
+                                        <div x-show="result.Status === 'REJECTED'" class="text-3xl font-black text-rose-600 flex items-center gap-3">
+                                            <i class="fa-solid fa-times-circle"></i> TỪ CHỐI
+                                        </div>
+                                        <p class="text-sm font-bold mt-2" 
+                                           :class="result.Status === 'APPROVED' ? 'text-emerald-600' : 'text-rose-600'" 
+                                           x-text="result.Reason"></p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Độ tin cậy</p>
+                                        <h3 class="text-3xl font-black text-slate-800" x-text="(result.Probability * 100).toFixed(1) + '%'"></h3>
+                                        <div class="w-32 bg-slate-200 rounded-full h-2 mt-2">
+                                            <div class="h-2 rounded-full transition-all" 
+                                                 :class="result.Status === 'APPROVED' ? 'bg-emerald-500' : 'bg-rose-500'"
+                                                 :style="'width: ' + (result.Probability * 100) + '%'"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Decision Tree Visualization -->
+                            <div class="glass-panel rounded-2xl p-6 flex flex-col flex-grow">
+                                <div class="flex justify-between items-center mb-4">
+                                    <div>
+                                        <h3 class="text-base font-bold text-slate-800">Luồng Logic Cây Quyết Định</h3>
+                                        <p class="text-xs text-slate-500 mt-1">Mô phỏng đường đi của dữ liệu qua các Node quy tắc. Có thể zoom và kéo để xem chi tiết.</p>
+                                    </div>
+                                    <span class="px-2 py-1 text-[10px] font-bold uppercase rounded bg-blue-50 text-blue-600 border border-blue-100">Decision Tree</span>
+                                </div>
+                                <div id="treeChart" class="w-full flex-grow bg-white rounded-xl shadow-inner" style="min-height: 500px;"></div>
+                            </div>
+
+                        </div>
+                    </template>
                 </div>
 
             </div>
@@ -189,151 +227,436 @@
     <script>
         document.addEventListener('alpine:init', () => {
             Alpine.data('predictionApp', () => ({
-                step: 'input', // 'input' or 'result'
                 loading: false,
+                result: null,
                 treeChartInstance: null,
                 form: {
-                    AgeGroup: '',
-                    Income: '',
                     CreditScore: '',
+                    Income: '',
                     LoanAmount: '',
-                    LTV: 50
-                },
-                result: {
-                    Status: '',
-                    Probability: 0,
-                    Reason: ''
+                    PropertyValue: '',
+                    LTV: 50,
+                    DTI: '',
+                    LoanPurpose: ''
                 },
 
                 simulatePrediction() {
                     this.loading = true;
                     setTimeout(() => {
-                        // Mock Logic
+                        // Mock Logic based on Credit_Decision_Tree model
                         const score = parseInt(this.form.CreditScore);
                         const ltv = parseInt(this.form.LTV);
+                        const dti = parseInt(this.form.DTI);
+                        const income = parseInt(this.form.Income);
                         
-                        if (score >= 650 && ltv <= 80) {
-                            this.result = { Status: 'APPROVED', Probability: 0.89, Reason: 'Credit Score Tốt & LTV An Toàn' };
+                        // Decision logic
+                        let approved = false;
+                        let probability = 0.5;
+                        let reason = '';
+                        
+                        if (score >= 700 && ltv <= 80 && dti <= 35) {
+                            approved = true;
+                            probability = 0.92;
+                            reason = 'Credit Score Tốt, LTV & DTI An Toàn';
+                        } else if (score >= 650 && ltv <= 85 && dti <= 40) {
+                            approved = true;
+                            probability = 0.75;
+                            reason = 'Đủ Điều Kiện Cơ Bản';
                         } else if (score < 600) {
-                            this.result = { Status: 'REJECTED', Probability: 0.95, Reason: 'Credit Score Quá Thấp' };
+                            approved = false;
+                            probability = 0.15;
+                            reason = 'Credit Score Quá Thấp';
+                        } else if (ltv > 90) {
+                            approved = false;
+                            probability = 0.25;
+                            reason = 'LTV Vượt Mức Cho Phép';
+                        } else if (dti > 45) {
+                            approved = false;
+                            probability = 0.30;
+                            reason = 'DTI Quá Cao';
                         } else {
-                            this.result = { Status: 'REJECTED', Probability: 0.72, Reason: 'LTV Vượt Mức Cho Phép' };
+                            approved = false;
+                            probability = 0.40;
+                            reason = 'Rủi Ro Trung Bình';
                         }
                         
+                        this.result = { 
+                            Status: approved ? 'APPROVED' : 'REJECTED', 
+                            Probability: approved ? probability : (1 - probability), 
+                            Reason: reason 
+                        };
+                        
                         this.loading = false;
-                        this.step = 'result';
                         
                         // Render chart after DOM updates
                         setTimeout(() => this.renderTreeChart(), 100);
                     }, 1000);
                 },
 
-                reset() {
-                    this.step = 'input';
-                    if (this.treeChartInstance) {
-                        this.treeChartInstance.dispose();
-                        this.treeChartInstance = null;
-                    }
-                },
-
                 renderTreeChart() {
                     const chartDom = document.getElementById('treeChart');
                     if (!chartDom) return;
 
+                    // Dispose old instance if exists
+                    if (this.treeChartInstance) {
+                        this.treeChartInstance.dispose();
+                    }
+
                     this.treeChartInstance = echarts.init(chartDom);
                     
-                    // Build mock tree data reflecting the decision
+                    // Build tree data reflecting the actual decision
                     const isApproved = this.result.Status === 'APPROVED';
+                    const score = parseInt(this.form.CreditScore);
+                    const ltv = parseInt(this.form.LTV);
+                    const dti = parseInt(this.form.DTI);
                     
                     const treeData = {
-                        name: 'Root\nCredit Score?',
+                        name: 'ROOT\nCredit Score?',
                         value: 100,
-                        itemStyle: { color: '#3b82f6' },
+                        itemStyle: { 
+                            color: '#1e40af',
+                            borderColor: '#1e3a8a',
+                            borderWidth: 3
+                        },
+                        label: {
+                            color: '#fff',
+                            backgroundColor: '#1e40af',
+                            padding: [8, 12],
+                            borderRadius: 6,
+                            fontSize: 13,
+                            fontWeight: 'bold'
+                        },
                         children: [
                             {
-                                name: '>= 650',
-                                itemStyle: { color: score >= 650 ? '#3b82f6' : '#cbd5e1' },
+                                name: '>= 700',
+                                itemStyle: { 
+                                    color: score >= 700 ? '#2563eb' : '#94a3b8',
+                                    borderColor: score >= 700 ? '#1e40af' : '#64748b',
+                                    borderWidth: score >= 700 ? 3 : 1
+                                },
+                                label: {
+                                    color: score >= 700 ? '#1e293b' : '#64748b',
+                                    backgroundColor: score >= 700 ? '#dbeafe' : '#f1f5f9',
+                                    fontWeight: score >= 700 ? 'bold' : 'normal'
+                                },
                                 children: [
                                     {
                                         name: 'LTV <= 80%',
-                                        itemStyle: { color: isApproved ? '#10b981' : '#cbd5e1' },
+                                        itemStyle: { 
+                                            color: (score >= 700 && ltv <= 80) ? '#2563eb' : '#94a3b8',
+                                            borderColor: (score >= 700 && ltv <= 80) ? '#1e40af' : '#64748b',
+                                            borderWidth: (score >= 700 && ltv <= 80) ? 3 : 1
+                                        },
+                                        label: {
+                                            color: (score >= 700 && ltv <= 80) ? '#1e293b' : '#64748b',
+                                            backgroundColor: (score >= 700 && ltv <= 80) ? '#dbeafe' : '#f1f5f9',
+                                            fontWeight: (score >= 700 && ltv <= 80) ? 'bold' : 'normal'
+                                        },
                                         children: [
-                                            { name: 'APPROVED', value: 1, itemStyle: { color: '#10b981' }, label: { fontSize: 14, fontWeight: 'bold' } }
+                                            {
+                                                name: 'DTI <= 35%',
+                                                itemStyle: { 
+                                                    color: (score >= 700 && ltv <= 80 && dti <= 35 && isApproved) ? '#059669' : '#94a3b8',
+                                                    borderColor: (score >= 700 && ltv <= 80 && dti <= 35 && isApproved) ? '#047857' : '#64748b',
+                                                    borderWidth: (score >= 700 && ltv <= 80 && dti <= 35 && isApproved) ? 3 : 1
+                                                },
+                                                label: {
+                                                    color: (score >= 700 && ltv <= 80 && dti <= 35 && isApproved) ? '#1e293b' : '#64748b',
+                                                    backgroundColor: (score >= 700 && ltv <= 80 && dti <= 35 && isApproved) ? '#d1fae5' : '#f1f5f9',
+                                                    fontWeight: (score >= 700 && ltv <= 80 && dti <= 35 && isApproved) ? 'bold' : 'normal'
+                                                },
+                                                children: [
+                                                    { 
+                                                        name: '✓ APPROVED', 
+                                                        value: 1, 
+                                                        itemStyle: { 
+                                                            color: '#10b981',
+                                                            borderColor: '#059669',
+                                                            borderWidth: 3
+                                                        }, 
+                                                        label: { 
+                                                            fontSize: 15, 
+                                                            fontWeight: 'bold',
+                                                            color: '#fff',
+                                                            backgroundColor: '#10b981',
+                                                            padding: [8, 14],
+                                                            borderRadius: 8
+                                                        } 
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                name: 'DTI > 35%',
+                                                itemStyle: { 
+                                                    color: (score >= 700 && ltv <= 80 && dti > 35) ? '#f59e0b' : '#94a3b8',
+                                                    borderColor: (score >= 700 && ltv <= 80 && dti > 35) ? '#d97706' : '#64748b',
+                                                    borderWidth: (score >= 700 && ltv <= 80 && dti > 35) ? 3 : 1
+                                                },
+                                                label: {
+                                                    color: (score >= 700 && ltv <= 80 && dti > 35) ? '#1e293b' : '#64748b',
+                                                    backgroundColor: (score >= 700 && ltv <= 80 && dti > 35) ? '#fef3c7' : '#f1f5f9',
+                                                    fontWeight: (score >= 700 && ltv <= 80 && dti > 35) ? 'bold' : 'normal'
+                                                },
+                                                children: [
+                                                    { 
+                                                        name: '⚠ REVIEW', 
+                                                        value: 1, 
+                                                        itemStyle: { 
+                                                            color: '#f59e0b',
+                                                            borderColor: '#d97706',
+                                                            borderWidth: 3
+                                                        }, 
+                                                        label: { 
+                                                            fontSize: 15, 
+                                                            fontWeight: 'bold',
+                                                            color: '#fff',
+                                                            backgroundColor: '#f59e0b',
+                                                            padding: [8, 14],
+                                                            borderRadius: 8
+                                                        } 
+                                                    }
+                                                ]
+                                            }
                                         ]
                                     },
                                     {
                                         name: 'LTV > 80%',
-                                        itemStyle: { color: (!isApproved && score >= 650) ? '#f43f5e' : '#cbd5e1' },
+                                        itemStyle: { 
+                                            color: (score >= 700 && ltv > 80) ? '#dc2626' : '#94a3b8',
+                                            borderColor: (score >= 700 && ltv > 80) ? '#b91c1c' : '#64748b',
+                                            borderWidth: (score >= 700 && ltv > 80) ? 3 : 1
+                                        },
+                                        label: {
+                                            color: (score >= 700 && ltv > 80) ? '#1e293b' : '#64748b',
+                                            backgroundColor: (score >= 700 && ltv > 80) ? '#fee2e2' : '#f1f5f9',
+                                            fontWeight: (score >= 700 && ltv > 80) ? 'bold' : 'normal'
+                                        },
                                         children: [
-                                            { name: 'REJECTED', value: 1, itemStyle: { color: '#f43f5e' }, label: { fontSize: 14, fontWeight: 'bold' } }
+                                            { 
+                                                name: '✗ REJECTED', 
+                                                value: 1, 
+                                                itemStyle: { 
+                                                    color: '#ef4444',
+                                                    borderColor: '#dc2626',
+                                                    borderWidth: 3
+                                                }, 
+                                                label: { 
+                                                    fontSize: 15, 
+                                                    fontWeight: 'bold',
+                                                    color: '#fff',
+                                                    backgroundColor: '#ef4444',
+                                                    padding: [8, 14],
+                                                    borderRadius: 8
+                                                } 
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                name: '650-699',
+                                itemStyle: { 
+                                    color: (score >= 650 && score < 700) ? '#2563eb' : '#94a3b8',
+                                    borderColor: (score >= 650 && score < 700) ? '#1e40af' : '#64748b',
+                                    borderWidth: (score >= 650 && score < 700) ? 3 : 1
+                                },
+                                label: {
+                                    color: (score >= 650 && score < 700) ? '#1e293b' : '#64748b',
+                                    backgroundColor: (score >= 650 && score < 700) ? '#dbeafe' : '#f1f5f9',
+                                    fontWeight: (score >= 650 && score < 700) ? 'bold' : 'normal'
+                                },
+                                children: [
+                                    {
+                                        name: 'LTV <= 85%\n& DTI <= 40%',
+                                        itemStyle: { 
+                                            color: (score >= 650 && score < 700 && ltv <= 85 && dti <= 40 && isApproved) ? '#059669' : '#94a3b8',
+                                            borderColor: (score >= 650 && score < 700 && ltv <= 85 && dti <= 40 && isApproved) ? '#047857' : '#64748b',
+                                            borderWidth: (score >= 650 && score < 700 && ltv <= 85 && dti <= 40 && isApproved) ? 3 : 1
+                                        },
+                                        label: {
+                                            color: (score >= 650 && score < 700 && ltv <= 85 && dti <= 40 && isApproved) ? '#1e293b' : '#64748b',
+                                            backgroundColor: (score >= 650 && score < 700 && ltv <= 85 && dti <= 40 && isApproved) ? '#d1fae5' : '#f1f5f9',
+                                            fontWeight: (score >= 650 && score < 700 && ltv <= 85 && dti <= 40 && isApproved) ? 'bold' : 'normal'
+                                        },
+                                        children: [
+                                            { 
+                                                name: '✓ APPROVED', 
+                                                value: 1, 
+                                                itemStyle: { 
+                                                    color: '#10b981',
+                                                    borderColor: '#059669',
+                                                    borderWidth: 3
+                                                }, 
+                                                label: { 
+                                                    fontSize: 15, 
+                                                    fontWeight: 'bold',
+                                                    color: '#fff',
+                                                    backgroundColor: '#10b981',
+                                                    padding: [8, 14],
+                                                    borderRadius: 8
+                                                } 
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        name: 'Else',
+                                        itemStyle: { 
+                                            color: (score >= 650 && score < 700 && (ltv > 85 || dti > 40)) ? '#dc2626' : '#94a3b8',
+                                            borderColor: (score >= 650 && score < 700 && (ltv > 85 || dti > 40)) ? '#b91c1c' : '#64748b',
+                                            borderWidth: (score >= 650 && score < 700 && (ltv > 85 || dti > 40)) ? 3 : 1
+                                        },
+                                        label: {
+                                            color: (score >= 650 && score < 700 && (ltv > 85 || dti > 40)) ? '#1e293b' : '#64748b',
+                                            backgroundColor: (score >= 650 && score < 700 && (ltv > 85 || dti > 40)) ? '#fee2e2' : '#f1f5f9',
+                                            fontWeight: (score >= 650 && score < 700 && (ltv > 85 || dti > 40)) ? 'bold' : 'normal'
+                                        },
+                                        children: [
+                                            { 
+                                                name: '✗ REJECTED', 
+                                                value: 1, 
+                                                itemStyle: { 
+                                                    color: '#ef4444',
+                                                    borderColor: '#dc2626',
+                                                    borderWidth: 3
+                                                }, 
+                                                label: { 
+                                                    fontSize: 15, 
+                                                    fontWeight: 'bold',
+                                                    color: '#fff',
+                                                    backgroundColor: '#ef4444',
+                                                    padding: [8, 14],
+                                                    borderRadius: 8
+                                                } 
+                                            }
                                         ]
                                     }
                                 ]
                             },
                             {
                                 name: '< 650',
-                                itemStyle: { color: score < 650 ? '#f43f5e' : '#cbd5e1' },
+                                itemStyle: { 
+                                    color: score < 650 ? '#dc2626' : '#94a3b8',
+                                    borderColor: score < 650 ? '#b91c1c' : '#64748b',
+                                    borderWidth: score < 650 ? 3 : 1
+                                },
+                                label: {
+                                    color: score < 650 ? '#1e293b' : '#64748b',
+                                    backgroundColor: score < 650 ? '#fee2e2' : '#f1f5f9',
+                                    fontWeight: score < 650 ? 'bold' : 'normal'
+                                },
                                 children: [
-                                    { name: 'REJECTED', value: 1, itemStyle: { color: '#f43f5e' }, label: { fontSize: 14, fontWeight: 'bold' } }
+                                    { 
+                                        name: '✗ REJECTED', 
+                                        value: 1, 
+                                        itemStyle: { 
+                                            color: '#ef4444',
+                                            borderColor: '#dc2626',
+                                            borderWidth: 3
+                                        }, 
+                                        label: { 
+                                            fontSize: 15, 
+                                            fontWeight: 'bold',
+                                            color: '#fff',
+                                            backgroundColor: '#ef4444',
+                                            padding: [8, 14],
+                                            borderRadius: 8
+                                        } 
+                                    }
                                 ]
                             }
                         ]
                     };
 
                     const option = {
-                        tooltip: { trigger: 'item', triggerOn: 'mousemove' },
+                        tooltip: { 
+                            trigger: 'item', 
+                            triggerOn: 'mousemove',
+                            backgroundColor: 'rgba(0,0,0,0.8)',
+                            borderColor: '#334155',
+                            borderWidth: 1,
+                            textStyle: {
+                                color: '#fff',
+                                fontSize: 12
+                            }
+                        },
                         series: [
                             {
                                 type: 'tree',
                                 data: [treeData],
-                                top: '5%', left: '10%', bottom: '5%', right: '20%',
-                                symbolSize: 10,
+                                top: '5%', 
+                                left: '5%', 
+                                bottom: '5%', 
+                                right: '15%',
+                                symbolSize: 12,
+                                symbol: 'circle',
+                                orient: 'LR',
+                                layout: 'orthogonal',
+                                edgeShape: 'polyline',
+                                edgeForkPosition: '50%',
+                                roam: true,
+                                scaleLimit: {
+                                    min: 0.3,
+                                    max: 3
+                                },
+                                initialTreeDepth: -1,
+                                expandAndCollapse: false,
                                 label: {
                                     position: 'left',
                                     verticalAlign: 'middle',
                                     align: 'right',
-                                    fontSize: 11,
+                                    fontSize: 10,
                                     fontFamily: 'Inter',
-                                    color: '#475569',
+                                    color: '#1e293b',
                                     backgroundColor: '#f8fafc',
-                                    padding: [4, 6],
+                                    padding: [4, 8],
                                     borderRadius: 4,
-                                    borderWidth: 1,
-                                    borderColor: '#e2e8f0'
+                                    borderWidth: 1.5,
+                                    borderColor: '#cbd5e1',
+                                    distance: 8
                                 },
                                 leaves: {
                                     label: {
                                         position: 'right',
                                         verticalAlign: 'middle',
                                         align: 'left',
+                                        fontSize: 12,
+                                        fontWeight: 'bold',
                                         color: '#fff',
-                                        padding: [6, 10]
+                                        padding: [6, 12],
+                                        borderRadius: 6,
+                                        distance: 8
                                     }
                                 },
-                                emphasis: { focus: 'descendant' },
-                                expandAndCollapse: true,
+                                emphasis: { 
+                                    focus: 'descendant',
+                                    itemStyle: {
+                                        shadowBlur: 10,
+                                        shadowColor: 'rgba(0,0,0,0.3)'
+                                    }
+                                },
                                 animationDuration: 1000,
                                 animationDurationUpdate: 750,
-                                initialTreeDepth: 3,
                                 lineStyle: {
-                                    color: '#cbd5e1',
+                                    color: '#94a3b8',
                                     width: 2,
-                                    curveness: 0.5
+                                    curveness: 0.5,
+                                    shadowBlur: 4,
+                                    shadowColor: 'rgba(0,0,0,0.1)'
                                 }
                             }
                         ]
                     };
-                    
-                    // Small hack for closure issue with `score`
-                    const currentScore = parseInt(this.form.CreditScore);
-                    treeData.children[0].itemStyle.color = currentScore >= 650 ? '#3b82f6' : '#cbd5e1';
-                    treeData.children[1].itemStyle.color = currentScore < 650 ? '#f43f5e' : '#cbd5e1';
 
-                    this.treeChartInstance.setOption(option);
+                    this.treeChartInstance.setOption(option, true);
                     
-                    window.addEventListener('resize', () => {
-                        if(this.treeChartInstance) this.treeChartInstance.resize();
-                    });
+                    // Auto resize on window resize
+                    const resizeHandler = () => {
+                        if(this.treeChartInstance) {
+                            this.treeChartInstance.resize();
+                        }
+                    };
+                    window.removeEventListener('resize', resizeHandler);
+                    window.addEventListener('resize', resizeHandler);
                 }
             }));
         });

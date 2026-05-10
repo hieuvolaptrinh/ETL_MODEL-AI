@@ -44,6 +44,9 @@ namespace ASM_DM_Loan_UI.Models
         [Required(ErrorMessage = "Vui lòng nhập DTI")]
         [Display(Name = "Debt-to-Income Ratio (%)")]
         public double DTI { get; set; }
+
+        [Display(Name = "Mục đích vay")]
+        public string LoanPurpose { get; set; }
     }
 
     /// <summary>

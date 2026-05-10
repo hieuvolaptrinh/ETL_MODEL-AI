@@ -8,13 +8,13 @@ namespace ASM_DM_Loan_UI.Models
     public class DecisionTreePredictionResult
     {
         public int ID { get; set; }
-        public string Gender { get; set; }
-        public string AgeGroup { get; set; }
         public double CreditScore { get; set; }
         public double Income { get; set; }
         public double LoanAmount { get; set; }
+        public double PropertyValue { get; set; }
         public double LTV { get; set; }
         public double DTI { get; set; }
+        public string LoanPurpose { get; set; }
         
         // Kết quả dự đoán
         public double ApprovalProbability { get; set; }

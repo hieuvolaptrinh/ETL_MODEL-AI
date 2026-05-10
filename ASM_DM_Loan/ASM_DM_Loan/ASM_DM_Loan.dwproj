@@ -24,12 +24,12 @@
       <FullPath>Logistic_Regression_Status.dmm</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Credit_Decision_Tree.dmm</Name>
-      <FullPath>Credit_Decision_Tree.dmm</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>Credit_Clustering.dmm</Name>
       <FullPath>Credit_Clustering.dmm</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Credit_Decision_Tree.dmm</Name>
+      <FullPath>Credit_Decision_Tree.dmm</FullPath>
     </ProjectItem>
   </MiningModels>
   <Configurations>
@@ -40,14 +40,14 @@
           <ConfigurationSetting>
             <Id>ETL Model AI</Id>
             <Name>ETL Model AI</Name>
-            <Value xsi:type="xsd:string">Provider=SQLNCLI11.1;Data Source=localhost;Persist Security Info=True;Password=;User ID=;Initial Catalog=ETLModelAI</Value>
+            <Value xsi:type="xsd:string">Provider=SQLNCLI11.1;Data Source=localhost;Integrated Security=SSPI;Initial Catalog=ETLModelAI</Value>
           </ConfigurationSetting>
         </ConnectionMappings>
         <ConnectionSecurityMappings>
           <ConfigurationSetting>
             <Id>ETL Model AI</Id>
             <Name>ETL Model AI</Name>
-            <Value xsi:type="xsd:int">1</Value>
+            <Value xsi:type="xsd:int">0</Value>
           </ConfigurationSetting>
         </ConnectionSecurityMappings>
       </Options>

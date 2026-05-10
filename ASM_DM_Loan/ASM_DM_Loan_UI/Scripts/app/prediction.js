@@ -8,14 +8,13 @@ function predictionApp() {
         error: null,
         result: null,
         form: {
-            Gender: '',
-            AgeGroup: '',
             CreditScore: 750,
             Income: 5000,
             LoanAmount: 200000,
             PropertyValue: 300000,
             LTV: 80,
-            DTI: 35
+            DTI: 35,
+            LoanPurpose: 'Home'
         },
 
         async predict() {
