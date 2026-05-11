@@ -17,6 +17,10 @@ namespace ASM_DM_Loan_UI.Models
         [Display(Name = "Nhóm tuổi")]
         public string AgeGroup { get; set; }
 
+        [Display(Name = "Tuổi")]
+        [Range(18, 100, ErrorMessage = "Tuổi phải từ 18 đến 100")]
+        public int? Age { get; set; }
+
         [Required(ErrorMessage = "Vui lòng nhập Credit Score")]
         [Range(300, 900, ErrorMessage = "Credit Score phải từ 300 đến 900")]
         [Display(Name = "Credit Score")]
@@ -47,6 +51,21 @@ namespace ASM_DM_Loan_UI.Models
 
         [Display(Name = "Mục đích vay")]
         public string LoanPurpose { get; set; }
+
+        // Thêm các trường cho Logistic Regression Model
+        [Display(Name = "Loại tín dụng")]
+        public string CreditType { get; set; }
+
+        [Display(Name = "Loại khoản vay")]
+        public string LoanType { get; set; }
+
+        [Display(Name = "Lãi suất (%)")]
+        [Range(0, 100, ErrorMessage = "Lãi suất phải từ 0 đến 100")]
+        public double? RateOfInterest { get; set; }
+
+        [Display(Name = "Kỳ hạn (tháng)")]
+        [Range(1, 360, ErrorMessage = "Kỳ hạn phải từ 1 đến 360 tháng")]
+        public int? Term { get; set; }
     }
 
     /// <summary>

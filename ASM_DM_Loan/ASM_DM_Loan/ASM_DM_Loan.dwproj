@@ -40,14 +40,20 @@
           <ConfigurationSetting>
             <Id>ETL Model AI</Id>
             <Name>ETL Model AI</Name>
-            <Value xsi:type="xsd:string">Provider=SQLNCLI11.1;Data Source=localhost;Integrated Security=SSPI;Initial Catalog=ETLModelAI</Value>
+            <Value xsi:type="xsd:string">Provider=SQLNCLI11.1;Data Source=localhost;Persist Security Info=True;Password=;User ID=;Initial Catalog=ETLModelAI</Value>
           </ConfigurationSetting>
         </ConnectionMappings>
+        <ConnectionProviderMappings>
+          <ConfigurationSetting>
+            <Id>ETL Model AI</Id>
+            <Name>ETL Model AI</Name>
+          </ConfigurationSetting>
+        </ConnectionProviderMappings>
         <ConnectionSecurityMappings>
           <ConfigurationSetting>
             <Id>ETL Model AI</Id>
             <Name>ETL Model AI</Name>
-            <Value xsi:type="xsd:int">0</Value>
+            <Value xsi:type="xsd:int">1</Value>
           </ConfigurationSetting>
         </ConnectionSecurityMappings>
       </Options>

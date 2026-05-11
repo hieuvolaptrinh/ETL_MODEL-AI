@@ -1,8 +1,8 @@
 ﻿<DeploymentSnapshot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
   <Target>
     <Database>ASM_DM_Loan</Database>
-    <Server>localhost\OLAP</Server>
-    <ConnectionString>Data Source=localhost\OLAP;Timeout=0</ConnectionString>
+    <Server>localhost</Server>
+    <ConnectionString>Data Source=localhost;Timeout=0</ConnectionString>
   </Target>
   <Options>
     <TransactionalDeployment>false</TransactionalDeployment>
@@ -19,35 +19,35 @@
     <ObjectSnapshots>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.RelationalDataSource</Type>
-        <TimeStamp>4prt4taJb8tw6hlOaJfx/OpyGyU=10/05/2026 2:30:16 CH10/05/2026 2:16:27 CH</TimeStamp>
+        <TimeStamp>y/t/qqtTiwf2F5Hud1tsv87NVLw=5/12/2026 12:02:40 AM5/12/2026 12:01:33 AM</TimeStamp>
         <ID>
           <String>ETL Model AI</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.DataSourceView</Type>
-        <TimeStamp>gnEXqYYbcCK9kI18kCnuEmuRIj8=11/05/2026 5:28:43 CH11/05/2026 5:28:43 CH</TimeStamp>
+        <TimeStamp>wCYay6SDRHCDE6hvAvCghi41Jms=5/12/2026 12:02:50 AM5/12/2026 12:02:50 AM</TimeStamp>
         <ID>
           <String>ETL Model AI</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.MiningStructure</Type>
-        <TimeStamp>9PtwIda/EqTabHuAPaXToJaXC2A=10/05/2026 4:28:04 CH05/05/2026 11:05:40 SA</TimeStamp>
+        <TimeStamp>9PtwIda/EqTabHuAPaXToJaXC2A=5/11/2026 11:10:55 PM5/11/2026 11:10:55 PM</TimeStamp>
         <ID>
           <String>Logistic_Regression_Status</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.MiningStructure</Type>
-        <TimeStamp>PDzk7o15aq/o7qnkerA9cUfmQ84=10/05/2026 2:16:27 CH10/05/2026 2:16:27 CH</TimeStamp>
+        <TimeStamp>PDzk7o15aq/o7qnkerA9cUfmQ84=5/11/2026 11:10:55 PM5/11/2026 11:10:55 PM</TimeStamp>
         <ID>
           <String>Credit_Clustering</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.MiningStructure</Type>
-        <TimeStamp>NrrcIXhjrkfCBmTmZECuzqVYYIA=11/05/2026 6:03:31 CH10/05/2026 2:56:45 CH</TimeStamp>
+        <TimeStamp>NrrcIXhjrkfCBmTmZECuzqVYYIA=5/11/2026 11:10:55 PM5/11/2026 11:10:55 PM</TimeStamp>
         <ID>
           <String>Credit_Decision_Tree</String>
         </ID>
@@ -55,7 +55,7 @@
     </ObjectSnapshots>
     <DatabaseSnapshot>
       <Type>Microsoft.AnalysisServices.Database</Type>
-      <TimeStamp>z01ZmU1rrI/ueLnMXhBnl7OYAm0=05/05/2026 11:05:40 SA05/05/2026 11:05:40 SA</TimeStamp>
+      <TimeStamp>z01ZmU1rrI/ueLnMXhBnl7OYAm0=5/11/2026 8:22:23 PM5/11/2026 8:22:23 PM</TimeStamp>
       <ID>
         <String>ASM_DM_Loan</String>
       </ID>
@@ -64,5 +64,5 @@
   </Snapshot>
   <AssemblyLocations />
   <ProcessingComplete>true</ProcessingComplete>
-  <LastDeployed>2026-05-11T11:13:57.566667Z</LastDeployed>
+  <LastDeployed>2026-05-11T17:08:07.916667Z</LastDeployed>
 </DeploymentSnapshot>

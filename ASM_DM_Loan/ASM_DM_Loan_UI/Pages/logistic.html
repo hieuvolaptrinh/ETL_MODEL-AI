@@ -1,534 +1,570 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logistic Regression - Probability Engine</title>
-    
-    <!-- Tailwind CSS -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logistic Regression - Bad Debt Radar</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#0284c7', // Sky-600
-                        secondary: '#475569',
-                        surface: '#ffffff',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#7c3aed",
+              secondary: "#0f172a",
+              surface: "#ffffff",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- ECharts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
-    
-    <!-- Confetti -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-    <!-- AlpineJS with Plugins -->
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
-    <!-- Custom JS -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
     <script src="/Scripts/components/app-header.js"></script>
-    <script src="/Scripts/utils/loan-utils.js"></script>
     <script src="/Scripts/app/logistic.js"></script>
-    
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f0f4f8; }
-        .glass-panel {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
-            border-radius: 1.5rem;
-        }
-        .form-input {
-            width: 100%;
-            background-color: #f8fafc;
-            border: 2px solid transparent;
-            color: #1e293b;
-            font-size: 0.875rem;
-            border-radius: 0.75rem;
-            padding: 0.875rem 1rem;
-            outline: none;
-            transition: all 0.2s;
-            font-weight: 500;
-        }
-        .form-input:focus {
-            background-color: #ffffff;
-            border-color: #0284c7;
-            box-shadow: 0 4px 14px 0 rgba(2, 132, 199, 0.1);
-        }
-        [x-cloak] { display: none !important; }
-    </style>
-</head>
 
-<body class="text-slate-800" x-data="creditAssessmentApp()" x-init="initEcharts()">
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+      }
+      [x-cloak] {
+        display: none !important;
+      }
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.86);
+        backdrop-filter: blur(18px);
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        box-shadow: 0 20px 45px -20px rgba(15, 23, 42, 0.25);
+        border-radius: 1.5rem;
+      }
+      .form-input {
+        width: 100%;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        color: #0f172a;
+        font-size: 0.875rem;
+        border-radius: 0.9rem;
+        padding: 0.9rem 1rem;
+        outline: none;
+        transition: all 0.2s ease;
+      }
+      .form-input:focus {
+        background: #fff;
+        border-color: #7c3aed;
+        box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.12);
+      }
+    </style>
+  </head>
+
+  <body class="text-slate-800" x-data="logisticApp()" x-init="init()">
     <app-header current-page="logistic"></app-header>
 
-    <div class="min-h-screen py-8">
-        <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <!-- Page Title -->
-            <div class="mb-8 flex justify-between items-end">
-                <div>
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-sky-100 text-sky-700 text-[10px] font-black uppercase tracking-widest mb-3">
-                        <i class="fa-solid fa-chart-line"></i> Logistic Regression Model
-                    </div>
-                    <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">Probability Engine</h1>
-                    <p class="text-slate-500 font-medium mt-2 text-lg">Đo lường xác suất phê duyệt hồ sơ tín dụng bằng phương trình Hồi quy Logistic.</p>
-                </div>
-                <div class="hidden lg:flex gap-3">
-                    <button @click="fillSampleData('good')" class="px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg text-sm font-bold border border-emerald-200 hover:bg-emerald-100 transition"><i class="fa-solid fa-magic"></i> Mẫu Hồ sơ Tốt</button>
-                    <button @click="fillSampleData('bad')" class="px-4 py-2 bg-rose-50 text-rose-700 rounded-lg text-sm font-bold border border-rose-200 hover:bg-rose-100 transition"><i class="fa-solid fa-magic"></i> Mẫu Hồ sơ Xấu</button>
-                </div>
+    <main class="min-h-screen py-8">
+      <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="mb-8 flex flex-col xl:flex-row xl:items-end xl:justify-between gap-4"
+        >
+          <div>
+            <div
+              class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-50 text-violet-700 text-[10px] font-black uppercase tracking-[0.25em] mb-3 border border-violet-100"
+            >
+              <i class="fa-solid fa-chart-pie"></i> SSAS Logistic Regression
             </div>
-
-            <!-- Workspace Layout -->
-            <div class="flex flex-col xl:flex-row gap-8">
-                
-                <!-- Left: Application Form (Pipeline) -->
-                <div class="xl:w-[45%] flex flex-col gap-6">
-                    <div class="glass-panel p-8 relative overflow-hidden">
-                        <!-- Decorative bg -->
-                        <div class="absolute -top-24 -right-24 w-48 h-48 bg-sky-50 rounded-full opacity-50 blur-2xl pointer-events-none"></div>
-                        
-                        <div class="flex items-center justify-between mb-8">
-                            <h2 class="text-xl font-bold text-slate-800 flex items-center gap-3">
-                                <span class="w-8 h-8 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center"><i class="fa-solid fa-file-signature"></i></span>
-                                Application Pipeline
-                            </h2>
-                        </div>
-
-                        <form @submit.prevent="predict" class="space-y-6 relative z-10">
-                            
-                            <!-- Demographics -->
-                            <div>
-                                <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">I. Nhân khẩu học</h3>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <label class="block text-xs font-bold text-slate-600 mb-2">Giới tính</label>
-                                        <select x-model="formData.gender" required class="form-input">
-                                            <option value="">Chọn giới tính</option>
-                                            <option value="Male">Nam</option>
-                                            <option value="Female">Nữ</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="block text-xs font-bold text-slate-600 mb-2">Độ tuổi</label>
-                                        <input type="number" x-model.number="formData.age" required min="18" max="100" class="form-input" placeholder="Nhập độ tuổi">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <hr class="border-slate-100">
-
-                            <!-- Financial Profile -->
-                            <div>
-                                <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">II. Khả năng tài chính</h3>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <label class="block text-xs font-bold text-slate-600 mb-2">Thu nhập tháng ($)</label>
-                                        <input type="number" x-model.number="formData.income" required min="0" class="form-input">
-                                    </div>
-                                    <!-- Credit Score field with Estimator shortcut -->
-                                    <div>
-                                        <label class="block text-xs font-bold text-slate-600 mb-2 flex justify-between items-center">
-                                            <span>Credit Score</span>
-                                            <button type="button" @click="showCreditEstimator = !showCreditEstimator" class="text-sky-500 hover:text-sky-700 text-[10px] font-bold flex items-center gap-1 underline underline-offset-2">
-                                                <i class="fa-solid fa-calculator"></i> Ước tính điểm
-                                            </button>
-                                        </label>
-                                        <input type="number" x-model.number="formData.creditScore" required min="300" max="850" class="form-input">
-                                        <!-- Score badge -->
-                                        <div class="mt-1.5 flex items-center gap-2">
-                                            <div class="h-1.5 flex-grow rounded-full bg-slate-100 overflow-hidden">
-                                                <div class="h-full rounded-full transition-all duration-500"
-                                                     :class="formData.creditScore >= 740 ? 'bg-emerald-500' : (formData.creditScore >= 580 ? 'bg-amber-400' : 'bg-rose-500')"
-                                                     :style="'width:' + Math.min(Math.max(((formData.creditScore - 300) / 550) * 100, 0), 100) + '%'"></div>
-                                            </div>
-                                            <span class="text-[10px] font-bold w-16 text-right"
-                                                  :class="getCreditScoreBadgeClass(formData.creditScore)"
-                                                  x-text="getCreditScoreLabel(formData.creditScore)"></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Credit Score Estimator Collapse -->
-                                <div x-show="showCreditEstimator" x-collapse class="mt-4">
-                                    <div class="p-4 bg-amber-50 border border-amber-100 rounded-xl space-y-3">
-                                        <h4 class="text-xs font-black text-amber-700 uppercase tracking-widest mb-2"><i class="fa-solid fa-star"></i> Ước tính điểm tín dụng</h4>
-                                        <label class="flex items-center justify-between cursor-pointer">
-                                            <span class="text-xs text-slate-600 font-medium">Có lịch sử vay vốn?</span>
-                                            <input type="checkbox" x-model="estimator.hasLoan" class="w-4 h-4 accent-sky-500">
-                                        </label>
-                                        <label class="flex items-center justify-between cursor-pointer">
-                                            <span class="text-xs text-slate-600 font-medium">Có thẻ tín dụng?</span>
-                                            <input type="checkbox" x-model="estimator.hasCreditCard" class="w-4 h-4 accent-sky-500">
-                                        </label>
-                                        <label class="flex items-center justify-between cursor-pointer">
-                                            <span class="text-xs text-slate-600 font-medium">Thanh toán đúng hạn?</span>
-                                            <input type="checkbox" x-model="estimator.payOnTime" class="w-4 h-4 accent-sky-500">
-                                        </label>
-                                        <label class="flex items-center justify-between cursor-pointer">
-                                            <span class="text-xs text-slate-600 font-medium">Có tài sản thế chấp?</span>
-                                            <input type="checkbox" x-model="estimator.hasAssets" class="w-4 h-4 accent-sky-500">
-                                        </label>
-                                        <label class="flex items-center justify-between cursor-pointer">
-                                            <span class="text-xs text-slate-600 font-medium">Thu nhập ổn định?</span>
-                                            <input type="checkbox" x-model="estimator.stableIncome" class="w-4 h-4 accent-sky-500">
-                                        </label>
-                                        <button type="button" @click="estimateCreditScore()" class="w-full mt-2 py-2 bg-amber-500 hover:bg-amber-600 text-white text-xs font-black rounded-lg transition-colors">
-                                            Áp dụng Ước tính →
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <hr class="border-slate-100">
-
-                            <!-- Loan Structure & Purpose -->
-                            <div>
-                                <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">III. Cấu trúc khoản vay</h3>
-                                <div class="space-y-4">
-                                    <div class="grid grid-cols-2 gap-4">
-                                        <div>
-                                            <label class="block text-xs font-bold text-slate-600 mb-2">
-                                                Mục đích vay 
-                                                <span class="text-slate-400 font-normal">(Tùy chọn - chỉ để gợi ý)</span>
-                                            </label>
-                                            <select x-model="formData.loanPurpose" class="form-input">
-                                                <option value="">Chọn mục đích</option>
-                                                <option value="home">Mua bất động sản</option>
-                                                <option value="business">Kinh doanh / Khởi nghiệp</option>
-                                                <option value="personal">Tiêu dùng cá nhân</option>
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <label class="block text-xs font-bold text-slate-600 mb-2">Nhu cầu vay vốn ($)</label>
-                                            <input type="number" x-model.number="formData.loanAmount" required min="0" class="form-input text-lg font-black text-sky-700">
-                                        </div>
-                                    </div>
-                                    <div class="grid grid-cols-2 gap-4">
-                                        <div>
-                                            <label class="block text-xs font-bold text-slate-600 mb-2">Giá trị tài sản ĐB ($)</label>
-                                            <input type="number" x-model.number="formData.propertyValue" required min="0" class="form-input">
-                                        </div>
-                                        <div>
-                                            <label class="block text-xs font-bold text-slate-600 mb-2">LTV Ước tính</label>
-                                            <div class="p-2.5 bg-slate-50 border-2 border-slate-100 rounded-xl">
-                                                <div class="flex justify-between items-baseline mb-1.5">
-                                                    <span class="text-xs text-slate-500">Tỷ lệ</span>
-                                                    <span class="font-black text-slate-800" x-text="calculatedLTV ? calculatedLTV.toFixed(1) + '%' : 'N/A'"></span>
-                                                </div>
-                                                <div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
-                                                    <div class="h-full rounded-full transition-all duration-500"
-                                                         :class="calculatedLTV > 90 ? 'bg-rose-500' : (calculatedLTV > 80 ? 'bg-amber-400' : 'bg-emerald-500')"
-                                                         :style="'width: ' + Math.min(calculatedLTV || 0, 100) + '%'"></div>
-                                                </div>
-                                                <div class="text-[9px] text-slate-400 mt-1" x-text="calculatedLTV > 80 ? 'LTV cao - rủi ro' : 'LTV an toàn'"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Animated Suggestions Panel -->
-                            <div x-show="suggestedPackages && suggestedPackages.length > 0" x-collapse>
-                                <div class="p-5 mt-2 bg-gradient-to-br from-indigo-50 to-blue-50 border border-blue-100 rounded-2xl shadow-inner relative overflow-hidden">
-                                    <div class="absolute -right-4 -top-4 text-blue-200 text-6xl opacity-20"><i class="fa-solid fa-gift"></i></div>
-                                    <h4 class="text-xs font-black text-indigo-600 uppercase tracking-widest mb-3 flex items-center gap-2">
-                                        <i class="fa-solid fa-sparkles animate-pulse"></i> Gói vay đề xuất AI
-                                    </h4>
-                                    <div class="space-y-3 relative z-10">
-                                        <template x-for="pkg in suggestedPackages" :key="pkg.id">
-                                            <div @click="selectPackage(pkg)"
-                                                 class="cursor-pointer bg-white p-4 rounded-xl border-2 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-md flex justify-between items-center"
-                                                 :class="selectedPackage === pkg.id ? 'border-indigo-500 shadow-md ring-2 ring-indigo-200' : 'border-transparent hover:border-indigo-200'">
-                                                <div class="flex items-center gap-3">
-                                                    <div class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center text-sm">
-                                                        <i class="fa-solid" :class="pkg.icon || 'fa-coins'"></i>
-                                                    </div>
-                                                    <div>
-                                                        <div class="font-bold text-slate-800 text-sm" x-text="pkg.name"></div>
-                                                        <div class="text-[10px] text-slate-500 mt-0.5">
-                                                            Kỳ hạn: <span class="font-bold text-slate-700" x-text="pkg.termDisplay || (pkg.termYears + ' năm')"></span>
-                                                            &bull; Lãi: <span class="font-bold text-slate-700" x-text="pkg.rateDisplay || (pkg.annualRate * 100).toFixed(1) + '%'"></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="text-right flex-shrink-0">
-                                                    <div class="text-[10px] text-slate-400 uppercase tracking-wider font-bold">Trả góp/tháng</div>
-                                                    <div class="text-base font-black text-indigo-600" x-text="'$' + LoanUtils.calculateMonthlyPayment(formData.loanAmount, pkg.annualRate, pkg.termYears).toLocaleString()"></div>
-                                                </div>
-                                            </div>
-                                        </template>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Error Alert -->
-                            <div x-show="error" x-collapse>
-                                <div class="p-4 bg-rose-50 border border-rose-200 rounded-xl flex items-start gap-3 mt-4">
-                                    <i class="fa-solid fa-circle-exclamation text-rose-500 mt-0.5"></i>
-                                    <p class="text-sm font-medium text-rose-700" x-text="error"></p>
-                                </div>
-                            </div>
-
-                            <div class="pt-4">
-                                <button type="submit" :disabled="loading" class="w-full bg-slate-900 hover:bg-sky-600 text-white font-black text-lg py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-sky-500/30 flex items-center justify-center gap-3">
-                                    <span x-show="!loading">Thực thi Mô hình (Execute)</span>
-                                    <span x-show="loading">Đang phân tích xác suất...</span>
-                                    <i x-show="!loading" class="fa-solid fa-bolt"></i>
-                                    <i x-show="loading" class="fa-solid fa-spinner fa-spin"></i>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Right: Probability Dashboard -->
-                <div class="xl:w-[55%] flex flex-col gap-6">
-                    
-                    <!-- Empty State -->
-                    <div x-show="!result && !loading" class="glass-panel flex-grow flex flex-col items-center justify-center p-12 text-center bg-white/50 border-dashed border-2">
-                        <div class="w-24 h-24 mb-6 rounded-full bg-sky-50 text-sky-200 flex items-center justify-center text-5xl">
-                            <i class="fa-solid fa-gauge-high text-sky-300"></i>
-                        </div>
-                        <h3 class="text-2xl font-extrabold text-slate-800 mb-2">Chờ nạp dữ liệu</h3>
-                        <p class="text-slate-500 max-w-sm">Hệ thống Logistic Regression sẽ tính toán phần trăm xác suất phê duyệt dựa trên các tham số rủi ro.</p>
-                    </div>
-
-                    <!-- Loading State -->
-                    <div x-show="loading" class="glass-panel flex-grow flex flex-col items-center justify-center p-12 text-center bg-white">
-                        <div class="relative w-32 h-32 mb-8">
-                            <div class="absolute inset-0 rounded-full border-4 border-slate-100"></div>
-                            <div class="absolute inset-0 rounded-full border-4 border-sky-500 border-t-transparent animate-spin"></div>
-                            <div class="absolute inset-0 flex items-center justify-center text-sky-500 text-2xl">
-                                <i class="fa-solid fa-brain fa-fade"></i>
-                            </div>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-800 animate-pulse">Computing Matrix...</h3>
-                    </div>
-
-                    <!-- Result State -->
-                    <div x-show="result && !loading" x-cloak class="flex flex-col gap-6 h-full" x-transition.duration.500ms>
-                        
-                        <!-- Top Dashboard: Gauge & Verdict -->
-                        <div class="glass-panel p-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-slate-900 text-white relative overflow-hidden">
-                            <!-- Background decoration -->
-                            <div class="absolute right-0 bottom-0 opacity-10 pointer-events-none">
-                                <i class="fa-solid fa-chart-line text-9xl"></i>
-                            </div>
-
-                            <!-- Gauge Chart Container -->
-                            <div class="flex flex-col items-center relative z-10">
-                                <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Approval Probability</h3>
-                                <div id="gaugeChart" class="w-full h-[250px]"></div>
-                            </div>
-
-                            <!-- AI Verdict -->
-                            <div class="relative z-10">
-                                <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Quyết định Hệ thống</h3>
-                                
-                                <div x-show="result?.PredictionResult === 'APPROVED'" class="mb-6">
-                                    <div class="inline-flex items-center gap-3 text-4xl font-black text-emerald-400 mb-2">
-                                        <i class="fa-solid fa-circle-check"></i> APPROVED
-                                    </div>
-                                    <p class="text-emerald-500/80 text-sm font-medium">Hồ sơ thỏa mãn ngưỡng xác suất an toàn.</p>
-                                </div>
-                                
-                                <div x-show="result?.PredictionResult === 'REJECTED'" class="mb-6">
-                                    <div class="inline-flex items-center gap-3 text-4xl font-black text-rose-400 mb-2">
-                                        <i class="fa-solid fa-circle-xmark"></i> REJECTED
-                                    </div>
-                                    <p class="text-rose-500/80 text-sm font-medium">Xác suất rủi ro cao, không đạt tiêu chuẩn duyệt.</p>
-                                </div>
-
-                                <div class="bg-slate-800/50 rounded-xl p-4 border border-slate-700/50 backdrop-blur">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <span class="text-xs text-slate-400">Risk Category</span>
-                                        <span class="text-sm font-bold" 
-                                              :class="getRiskCategoryColorClass(result?.RiskCategory)"
-                                              x-text="result?.RiskCategory"></span>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-xs text-slate-400">Độ tin cậy Model</span>
-                                        <span class="text-sm font-bold text-sky-400" x-text="result?.ConfidenceLevel || 'N/A'"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Bottom Metrics: Impact Features -->
-                        <div class="glass-panel p-6 flex-grow">
-                            <h3 class="text-sm font-bold text-slate-800 mb-6 flex items-center gap-2">
-                                <i class="fa-solid fa-scale-unbalanced text-sky-500"></i> Phân tích Trọng số (Feature Impact)
-                            </h3>
-                            
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                                <!-- DTI Card -->
-                                <div class="bg-slate-50 rounded-xl p-4 border border-slate-100">
-                                    <div class="text-xs font-bold text-slate-400 uppercase mb-1">Chỉ số DTI</div>
-                                    <div class="text-2xl font-black text-slate-800 mb-0.5" x-text="result?.DTI ? result.DTI.toFixed(1) + '%' : (calculatedDTI ? calculatedDTI.toFixed(1) + '%' : '0%')"></div>
-                                    <div class="text-[10px] font-medium text-slate-500">Tỷ lệ Nợ / Thu nhập</div>
-                                    <div class="w-full bg-slate-200 h-1.5 rounded-full mt-3 overflow-hidden">
-                                        <div class="h-full rounded-full transition-all duration-700"
-                                             :class="(result?.DTI || calculatedDTI) > 40 ? 'bg-rose-500' : 'bg-emerald-500'"
-                                             :style="'width: ' + Math.min(result?.DTI || calculatedDTI || 0, 100) + '%'"></div>
-                                    </div>
-                                    <div class="text-[9px] text-slate-400 mt-1" x-text="(result?.DTI || calculatedDTI) > 40 ? 'DTI cao - rủi ro' : 'DTI an toàn'"></div>
-                                </div>
-
-                                <!-- LTV Card -->
-                                <div class="bg-slate-50 rounded-xl p-4 border border-slate-100">
-                                    <div class="text-xs font-bold text-slate-400 uppercase mb-1">Chỉ số LTV</div>
-                                    <div class="text-2xl font-black text-slate-800 mb-0.5" x-text="result?.LTV ? result.LTV.toFixed(1) + '%' : (calculatedLTV ? calculatedLTV.toFixed(1) + '%' : '0%')"></div>
-                                    <div class="text-[10px] font-medium text-slate-500">Khoản vay / Tài sản</div>
-                                    <div class="w-full bg-slate-200 h-1.5 rounded-full mt-3 overflow-hidden">
-                                        <div class="h-full rounded-full transition-all duration-700"
-                                             :class="(result?.LTV || calculatedLTV) > 80 ? 'bg-amber-500' : 'bg-emerald-500'"
-                                             :style="'width: ' + Math.min(result?.LTV || calculatedLTV || 0, 100) + '%'"></div>
-                                    </div>
-                                    <div class="text-[9px] text-slate-400 mt-1" x-text="(result?.LTV || calculatedLTV) > 80 ? 'LTV cao - rủi ro' : 'LTV an toàn'"></div>
-                                </div>
-                            </div>
-
-                            <!-- AI Recommendation - Full Width Below -->
-                            <div class="bg-gradient-to-br from-sky-50 to-blue-50 rounded-xl p-5 border border-sky-200">
-                                <div class="flex items-start gap-3">
-                                    <div class="flex-shrink-0 w-10 h-10 bg-sky-500 rounded-lg flex items-center justify-center">
-                                        <i class="fa-solid fa-lightbulb text-white text-lg"></i>
-                                    </div>
-                                    <div class="flex-1">
-                                        <h4 class="text-sm font-bold text-sky-900 mb-2">Khuyến nghị từ AI</h4>
-                                        <p class="text-sm font-medium text-sky-800 leading-relaxed" x-text="getRecommendation()"></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
+            <h1 class="text-4xl font-black text-slate-900 tracking-tight">
+              Bad Debt Risk Radar
+            </h1>
+            <p class="text-slate-500 font-medium mt-2 text-lg max-w-3xl">
+              Trang hiển thị kết quả train và dự đoán xác suất nợ xấu của khách
+              hàng dựa trên hồ sơ tín dụng, khoản vay và tài sản.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <button
+              @click="fillSample('good')"
+              class="px-4 py-2.5 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold text-sm hover:bg-emerald-100 transition"
+            >
+              <i class="fa-solid fa-wand-magic-sparkles mr-2"></i>Mẫu an toàn
+            </button>
+            <button
+              @click="fillSample('bad')"
+              class="px-4 py-2.5 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 font-bold text-sm hover:bg-rose-100 transition"
+            >
+              <i class="fa-solid fa-bomb mr-2"></i>Mẫu rủi ro
+            </button>
+            <button
+              @click="fillSample('neutral')"
+              class="px-4 py-2.5 rounded-xl bg-slate-50 text-slate-700 border border-slate-200 font-bold text-sm hover:bg-slate-100 transition"
+            >
+              <i class="fa-solid fa-sliders mr-2"></i>Mẫu trung tính
+            </button>
+          </div>
         </div>
-    </div>
 
-    <!-- Injecting script to override/augment existing logistic.js functionality for ECharts -->
-    <script>
-        // Store echarts instance globally to access from Alpine
-        let gaugeChartInstance = null;
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+          <section class="xl:col-span-5 flex flex-col gap-6">
+            <div class="glass-panel p-7 relative overflow-hidden">
+              <div
+                class="absolute -top-20 -right-20 w-56 h-56 bg-violet-100 rounded-full blur-3xl opacity-40"
+              ></div>
+              <div class="flex items-center justify-between mb-6 relative z-10">
+                <div>
+                  <h2
+                    class="text-xl font-bold text-slate-900 flex items-center gap-3"
+                  >
+                    <span
+                      class="w-10 h-10 rounded-xl bg-violet-100 text-violet-600 flex items-center justify-center"
+                      ><i class="fa-solid fa-file-invoice-dollar"></i
+                    ></span>
+                    Hồ sơ đánh giá
+                  </h2>
+                  <p class="text-sm text-slate-500 mt-1">
+                    Nhập đầy đủ dữ liệu để mô hình logistic phân tích rủi ro.
+                  </p>
+                </div>
+                <div
+                  class="hidden md:flex items-center gap-2 text-xs font-bold text-violet-700 bg-violet-50 border border-violet-100 px-3 py-2 rounded-xl"
+                >
+                  <i class="fa-solid fa-bolt"></i> Real-time scoring
+                </div>
+              </div>
 
-        document.addEventListener('alpine:init', () => {
-            // We extend the existing creditAssessmentApp
-            const originalApp = creditAssessmentApp;
-            window.creditAssessmentApp = function() {
-                const app = originalApp();
-                
-                // Add color helper for new UI
-                app.getRiskCategoryColorClass = function(category) {
-                    if (!category) return 'text-slate-400';
-                    if (category.includes('LOW') || category.includes('THẤP')) return 'text-emerald-400';
-                    if (category.includes('MEDIUM') || category.includes('TRUNG BÌNH')) return 'text-amber-400';
-                    if (category.includes('HIGH') || category.includes('CAO')) return 'text-rose-400';
-                    return 'text-slate-400';
-                };
+              <form class="space-y-5 relative z-10" @submit.prevent="predict">
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-600 mb-2"
+                      >Giới tính</label
+                    >
+                    <select x-model="formData.gender" class="form-input">
+                      <option value="Male">Nam</option>
+                      <option value="Female">Nữ</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-600 mb-2"
+                      >Nhóm tuổi</label
+                    >
+                    <select x-model="formData.ageGroup" class="form-input">
+                      <option>25-34</option>
+                      <option>35-44</option>
+                      <option>45-54</option>
+                      <option>55-64</option>
+                      <option>65+</option>
+                    </select>
+                  </div>
+                </div>
 
-                // Watch result to trigger chart render
-                app.initEcharts = function() {
-                    this.$watch('result', (value) => {
-                        if (value && value.ApprovalProbability !== undefined) {
-                            setTimeout(() => { this.renderGaugeChart(); }, 100);
-                        }
-                    });
-                };
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-600 mb-2"
+                      >Credit Score</label
+                    >
+                    <input
+                      type="number"
+                      x-model.number="formData.creditScore"
+                      min="300"
+                      max="850"
+                      class="form-input"
+                    />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-600 mb-2"
+                      >Thu nhập / tháng ($)</label
+                    >
+                    <input
+                      type="number"
+                      x-model.number="formData.income"
+                      min="0"
+                      class="form-input"
+                    />
+                  </div>
+                </div>
 
-                app.renderGaugeChart = function() {
-                    const chartDom = document.getElementById('gaugeChart');
-                    if (!chartDom) return;
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-600 mb-2"
+                      >Khoản vay ($)</label
+                    >
+                    <input
+                      type="number"
+                      x-model.number="formData.loanAmount"
+                      min="0"
+                      class="form-input"
+                      @input="updateDerived()"
+                    />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-600 mb-2"
+                      >Giá trị tài sản ($)</label
+                    >
+                    <input
+                      type="number"
+                      x-model.number="formData.propertyValue"
+                      min="0"
+                      class="form-input"
+                      @input="updateDerived()"
+                    />
+                  </div>
+                </div>
 
-                    if (gaugeChartInstance) {
-                        gaugeChartInstance.dispose();
-                    }
+                <div class="grid grid-cols-2 gap-4 pt-2">
+                  <div
+                    class="rounded-2xl border-2 p-4 transition-all"
+                    :class="calculatedLTV > 90 ? 'bg-rose-50 border-rose-300' : (calculatedLTV > 80 ? 'bg-amber-50 border-amber-300' : 'bg-emerald-50 border-emerald-300')"
+                  >
+                    <div class="flex items-center justify-between mb-2">
+                      <div
+                        class="text-[10px] font-black uppercase tracking-widest"
+                        :class="calculatedLTV > 90 ? 'text-rose-600' : (calculatedLTV > 80 ? 'text-amber-600' : 'text-emerald-600')"
+                      >
+                        LTV (Loan-to-Value)
+                      </div>
+                      <i class="fa-solid" :class="calculatedLTV > 90 ? 'fa-triangle-exclamation text-rose-500' : (calculatedLTV > 80 ? 'fa-exclamation-circle text-amber-500' : 'fa-check-circle text-emerald-500')"></i>
+                    </div>
+                    <div
+                      class="text-3xl font-black mb-1"
+                      :class="calculatedLTV > 90 ? 'text-rose-700' : (calculatedLTV > 80 ? 'text-amber-700' : 'text-emerald-700')"
+                      x-text="calculatedLTV.toFixed(1) + '%'"
+                    ></div>
+                    <div class="w-full h-2 rounded-full bg-white/50 overflow-hidden">
+                      <div class="h-full rounded-full transition-all"
+                           :class="calculatedLTV > 90 ? 'bg-rose-500' : (calculatedLTV > 80 ? 'bg-amber-500' : 'bg-emerald-500')"
+                           :style="'width: ' + Math.min(calculatedLTV, 100) + '%'"></div>
+                    </div>
+                    <div class="text-[10px] font-bold mt-2"
+                         :class="calculatedLTV > 90 ? 'text-rose-600' : (calculatedLTV > 80 ? 'text-amber-600' : 'text-emerald-600')"
+                         x-text="calculatedLTV > 90 ? 'Rủi ro cao' : (calculatedLTV > 80 ? 'Cảnh báo' : 'An toàn')"></div>
+                  </div>
+                  <div
+                    class="rounded-2xl border-2 p-4 transition-all"
+                    :class="calculatedDTI > 45 ? 'bg-rose-50 border-rose-300' : (calculatedDTI > 35 ? 'bg-amber-50 border-amber-300' : 'bg-emerald-50 border-emerald-300')"
+                  >
+                    <div class="flex items-center justify-between mb-2">
+                      <div
+                        class="text-[10px] font-black uppercase tracking-widest"
+                        :class="calculatedDTI > 45 ? 'text-rose-600' : (calculatedDTI > 35 ? 'text-amber-600' : 'text-emerald-600')"
+                      >
+                        DTI (Debt-to-Income)
+                      </div>
+                      <i class="fa-solid" :class="calculatedDTI > 45 ? 'fa-triangle-exclamation text-rose-500' : (calculatedDTI > 35 ? 'fa-exclamation-circle text-amber-500' : 'fa-check-circle text-emerald-500')"></i>
+                    </div>
+                    <div
+                      class="text-3xl font-black mb-1"
+                      :class="calculatedDTI > 45 ? 'text-rose-700' : (calculatedDTI > 35 ? 'text-amber-700' : 'text-emerald-700')"
+                      x-text="calculatedDTI.toFixed(1) + '%'"
+                    ></div>
+                    <div class="w-full h-2 rounded-full bg-white/50 overflow-hidden">
+                      <div class="h-full rounded-full transition-all"
+                           :class="calculatedDTI > 45 ? 'bg-rose-500' : (calculatedDTI > 35 ? 'bg-amber-500' : 'bg-emerald-500')"
+                           :style="'width: ' + Math.min(calculatedDTI, 100) + '%'"></div>
+                    </div>
+                    <div class="text-[10px] font-bold mt-2"
+                         :class="calculatedDTI > 45 ? 'text-rose-600' : (calculatedDTI > 35 ? 'text-amber-600' : 'text-emerald-600')"
+                         x-text="calculatedDTI > 45 ? 'Rủi ro cao' : (calculatedDTI > 35 ? 'Cảnh báo' : 'An toàn')"></div>
+                  </div>
+                </div>
 
-                    gaugeChartInstance = echarts.init(chartDom);
+                <div
+                  x-show="error"
+                  x-cloak
+                  class="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-sm font-medium"
+                >
+                  <i class="fa-solid fa-circle-exclamation mr-2"></i
+                  ><span x-text="error"></span>
+                </div>
+
+                <button
+                  type="submit"
+                  class="w-full rounded-2xl bg-slate-900 hover:bg-violet-600 text-white font-black py-4 transition-all shadow-lg flex items-center justify-center gap-3 disabled:opacity-60"
+                  :disabled="loading"
+                >
+                  <i
+                    class="fa-solid"
+                    :class="loading ? 'fa-spinner fa-spin' : 'fa-magnifying-glass-chart'"
+                  ></i>
+                  <span
+                    x-text="loading ? 'Đang phân tích...' : 'Chạy Logistic Regression'"
+                  ></span>
+                </button>
+              </form>
+            </div>
+          </section>
+
+          <section class="xl:col-span-7 flex flex-col gap-6">
+            <div class="glass-panel p-7">
+              <div class="flex items-start justify-between gap-6 mb-6">
+                <div>
+                  <h2
+                    class="text-xl font-bold text-slate-900 flex items-center gap-3"
+                  >
+                    <span
+                      class="w-10 h-10 rounded-xl bg-violet-100 text-violet-600 flex items-center justify-center"
+                      ><i class="fa-solid fa-wave-square"></i
+                    ></span>
+                    Kết quả dự đoán nợ xấu
+                  </h2>
+                  <p class="text-sm text-slate-500 mt-1">
+                    Xác suất đầu ra từ mô hình Logistic Regression.
+                  </p>
+                </div>
+                <div class="text-right">
+                  <div
+                    class="text-xs font-black uppercase tracking-widest text-slate-400"
+                  >
+                    Độ tin cậy
+                  </div>
+                  <div
+                    class="text-lg font-black text-slate-900"
+                    x-text="result ? getConfidenceLevelVietnamese(result.ConfidenceLevel) : 'N/A'"
+                  ></div>
+                </div>
+              </div>
+
+              <div
+                x-show="!result && !loading"
+                class="rounded-3xl border-2 border-dashed border-slate-200 bg-slate-50 p-12 text-center"
+                x-cloak
+              >
+                <div
+                  class="w-20 h-20 mx-auto rounded-full bg-violet-100 text-violet-400 flex items-center justify-center text-4xl mb-4"
+                >
+                  <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3 class="text-2xl font-extrabold text-slate-900">
+                  Chưa có kết quả
+                </h3>
+                <p class="text-slate-500 mt-2 max-w-2xl mx-auto">
+                  Hãy bấm chạy mô hình để xem xác suất nợ xấu, mức rủi ro và
+                  khuyến nghị xử lý hồ sơ.
+                </p>
+              </div>
+
+              <div
+                x-show="loading"
+                class="rounded-3xl bg-slate-50 p-12 text-center"
+                x-cloak
+              >
+                <div
+                  class="w-16 h-16 mx-auto border-4 border-violet-100 border-t-violet-600 rounded-full animate-spin mb-4"
+                ></div>
+                <h3 class="text-lg font-bold text-slate-900">
+                  Đang xử lý mô hình...
+                </h3>
+              </div>
+
+              <div
+                x-show="result && !loading"
+                x-cloak
+                class="grid grid-cols-1 lg:grid-cols-5 gap-6"
+              >
+                <div
+                  class="lg:col-span-3 rounded-3xl p-6 bg-white border-2 border-slate-200 relative overflow-hidden shadow-lg"
+                >
+                  <div
+                    class="absolute right-0 bottom-0 opacity-5 text-[10rem] pointer-events-none text-violet-200"
+                  >
+                    <i class="fa-solid fa-chart-pie"></i>
+                  </div>
+                  <div class="relative z-10">
+                    <div class="flex items-center justify-between mb-4">
+                      <div>
+                        <div
+                          class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400"
+                        >
+                          Kết quả dự đoán
+                        </div>
+                        <div
+                          class="text-3xl font-black mt-2"
+                          :class="result && result.PredictionResult === 'BAD_DEBT' ? 'text-rose-600' : 'text-emerald-600'"
+                          x-text="result ? (result.PredictionResult === 'BAD_DEBT' ? 'NỢ XẤU' : 'AN TOÀN') : 'N/A'"
+                        ></div>
+                      </div>
+                      <div class="text-right">
+                        <div
+                          class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400"
+                        >
+                          Mức độ rủi ro
+                        </div>
+                        <div
+                          class="text-2xl font-black mt-2"
+                          :class="getRiskColor(result ? result.RiskLevel : null)"
+                          x-text="result ? getRiskLevelVietnamese(result.RiskLevel) : 'N/A'"
+                        ></div>
+                      </div>
+                    </div>
+
+                    <div id="riskChart" class="w-full h-[280px]"></div>
+                  </div>
+                </div>
+
+                <div class="lg:col-span-2 flex flex-col gap-4">
+                  <div
+                    class="rounded-3xl p-5 border bg-white shadow-sm"
+                    :class="getRiskBg(result ? result.RiskLevel : null)"
+                  >
+                    <div
+                      class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400"
+                    >
+                      Xác suất nợ xấu
+                    </div>
+                    <div
+                      class="text-4xl font-black text-slate-900 mt-2"
+                      x-text="result ? (((result.BadDebtProbability || 0) * 100).toFixed(1) + '%') : 'N/A'"
+                    ></div>
+                    <div
+                      class="w-full h-2 rounded-full bg-slate-200 mt-4 overflow-hidden"
+                    >
+                      <div
+                        class="h-full rounded-full bg-rose-500"
+                        :style="result ? ('width:' + ((result.BadDebtProbability || 0) * 100) + '%') : 'width:0%'"
+                      ></div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="rounded-3xl p-5 bg-white border border-slate-200 shadow-sm"
+                  >
+                    <div class="text-sm font-bold text-slate-900 mb-4">
+                      Thông số đầu vào
+                    </div>
+                    <div class="space-y-3 text-sm">
+                      <div class="flex justify-between">
+                        <span class="text-slate-500">Credit Score</span
+                        ><span
+                          class="font-bold"
+                          x-text="formData.creditScore"
+                        ></span>
+                      </div>
+                      <div class="flex justify-between">
+                        <span class="text-slate-500">Income</span
+                        ><span
+                          class="font-bold"
+                          x-text="'$' + Number(formData.income).toLocaleString()"
+                        ></span>
+                      </div>
+                      <div class="flex justify-between">
+                        <span class="text-slate-500">LTV</span
+                        ><span
+                          class="font-bold"
+                          x-text="formData.ltv.toFixed(1) + '%' "
+                        ></span>
+                      </div>
+                      <div class="flex justify-between">
+                        <span class="text-slate-500">DTI</span
+                        ><span
+                          class="font-bold"
+                          x-text="formData.dti.toFixed(1) + '%' "
+                        ></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Feature Importance Section -->
+            <div class="glass-panel p-7" x-show="result && result.FeatureImportance && result.FeatureImportance.length > 0" x-cloak>
+              <div class="flex items-center gap-3 mb-5">
+                <span
+                  class="w-10 h-10 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center"
+                  ><i class="fa-solid fa-list-check"></i
+                ></span>
+                <div>
+                  <h3 class="text-lg font-bold text-slate-900">
+                    Các yếu tố ảnh hưởng
+                  </h3>
+                  <p class="text-sm text-slate-500">
+                    Thông số đóng góp vào kết quả
+                  </p>
+                </div>
+              </div>
+
+              <div class="space-y-3">
+                <template x-for="(feature, index) in result.FeatureImportance" :key="index">
+                  <div class="rounded-xl border bg-white p-4 hover:shadow-sm transition-shadow"
+                       :class="{
+                         'border-rose-200': feature.Status === 'Bad',
+                         'border-amber-200': feature.Status === 'Warning',
+                         'border-slate-200': feature.Status === 'Good'
+                       }">
+                    <div class="flex items-center justify-between gap-4 mb-2">
+                      <div class="flex items-center gap-2">
+                        <span class="text-sm font-bold text-slate-900" x-text="feature.FeatureNameVi"></span>
+                        <span class="w-1.5 h-1.5 rounded-full"
+                              :class="{
+                                'bg-rose-500': feature.Status === 'Bad',
+                                'bg-amber-500': feature.Status === 'Warning',
+                                'bg-slate-400': feature.Status === 'Good'
+                              }"></span>
+                      </div>
+                      <div class="text-right">
+                        <span class="text-lg font-bold text-slate-900"
+                             x-text="feature.FeatureName.includes('Score') || feature.FeatureName.includes('Income') ? feature.Value.toLocaleString() : feature.Value.toFixed(1) + (feature.FeatureName.includes('LTV') || feature.FeatureName.includes('DTI') || feature.FeatureName.includes('Ratio') ? '%' : '')">
+                        </span>
+                      </div>
+                    </div>
                     
-                    const prob = (this.result.ApprovalProbability * 100).toFixed(1);
-                    const color = prob >= 70 ? '#10b981' : (prob >= 40 ? '#f59e0b' : '#f43f5e');
+                    <p class="text-xs text-slate-600 mb-2" x-text="feature.Description"></p>
+                    
+                    <div class="flex items-center gap-2">
+                      <div class="flex-1 h-1.5 rounded-full bg-slate-100 overflow-hidden">
+                        <div class="h-full rounded-full transition-all"
+                             :class="{
+                               'bg-rose-400': feature.Status === 'Bad',
+                               'bg-amber-400': feature.Status === 'Warning',
+                               'bg-slate-400': feature.Status === 'Good'
+                             }"
+                             :style="'width: ' + feature.ImpactScore + '%'">
+                        </div>
+                      </div>
+                      <span class="text-xs font-bold text-slate-500 w-10 text-right" x-text="feature.ImpactScore.toFixed(0) + '%'"></span>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </div>
 
-                    const option = {
-                        series: [
-                            {
-                                type: 'gauge',
-                                startAngle: 180,
-                                endAngle: 0,
-                                center: ['50%', '75%'],
-                                radius: '120%',
-                                min: 0,
-                                max: 100,
-                                splitNumber: 10,
-                                axisLine: {
-                                    lineStyle: {
-                                        width: 15,
-                                        color: [
-                                            [0.4, '#f43f5e'],
-                                            [0.7, '#f59e0b'],
-                                            [1, '#10b981']
-                                        ]
-                                    }
-                                },
-                                pointer: {
-                                    icon: 'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',
-                                    length: '12%',
-                                    width: 15,
-                                    offsetCenter: [0, '-60%'],
-                                    itemStyle: { color: 'auto' }
-                                },
-                                axisTick: { length: 12, lineStyle: { color: 'auto', width: 2 } },
-                                splitLine: { length: 20, lineStyle: { color: 'auto', width: 4 } },
-                                axisLabel: {
-                                    color: '#94a3b8',
-                                    fontSize: 10,
-                                    fontFamily: 'Inter',
-                                    distance: -50,
-                                    formatter: function (value) {
-                                        if (value === 0 || value === 50 || value === 100) return value + '%';
-                                        return '';
-                                    }
-                                },
-                                title: { offsetCenter: [0, '-20%'], fontSize: 12 },
-                                detail: {
-                                    fontSize: 40,
-                                    offsetCenter: [0, '0%'],
-                                    valueAnimation: true,
-                                    formatter: function (value) {
-                                        return Math.round(value) + '%';
-                                    },
-                                    color: '#f8fafc',
-                                    fontFamily: 'Inter',
-                                    fontWeight: '900'
-                                },
-                                data: [ { value: prob, name: 'Xác suất' } ]
-                            }
-                        ]
-                    };
-
-                    gaugeChartInstance.setOption(option);
-                    window.addEventListener('resize', () => { gaugeChartInstance.resize(); });
-                };
-
-                return app;
-            };
-        });
-    </script>
-</body>
+            <div class="glass-panel p-7">
+              <div class="flex items-center gap-3 mb-4">
+                <span
+                  class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center"
+                  ><i class="fa-solid fa-clipboard-list"></i
+                ></span>
+                <div>
+                  <h3 class="text-lg font-bold text-slate-900">
+                    Khuyến nghị từ mô hình
+                  </h3>
+                  <p class="text-sm text-slate-500">
+                    Diễn giải dễ hiểu để tư vấn khách hàng.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="rounded-3xl bg-gradient-to-br from-amber-50 to-white border border-amber-200 p-5"
+              >
+                <p
+                  class="text-slate-800 leading-7 font-medium"
+                  x-text="recommendationText()"
+                ></p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>

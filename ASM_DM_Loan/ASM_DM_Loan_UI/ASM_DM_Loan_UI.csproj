@@ -126,18 +126,18 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Controllers\DecisionTreeController.cs" />
-    <Compile Include="Controllers\LogisticRegressionController.cs" />
     <Compile Include="Controllers\ClusteringController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\LogisticRegressionController.cs" />
     <Compile Include="Models\CommonModels.cs" />
     <Compile Include="Models\DecisionTreeModels.cs" />
-    <Compile Include="Models\LogisticRegressionModels.cs" />
     <Compile Include="Models\ClusteringModels.cs" />
+    <Compile Include="Models\LogisticRegressionModels.cs" />
     <Compile Include="Services\DMXConnectionService.cs" />
     <Compile Include="Services\DecisionTreeService.cs" />
-    <Compile Include="Services\LogisticRegressionService.cs" />
     <Compile Include="Services\ClusteringService.cs" />
     <Compile Include="Services\DashboardService.cs" />
+    <Compile Include="Services\LogisticRegressionService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -148,12 +148,12 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\app\dashboard.js" />
     <Content Include="Scripts\app\prediction.js" />
-    <Content Include="Scripts\app\logistic.js" />
     <Content Include="Scripts\app\clustering.js" />
     <Content Include="index.html" />
     <Content Include="Pages\prediction.html" />
-    <Content Include="Pages\logistic.html" />
     <Content Include="Pages\clustering.html" />
+    <Content Include="Pages\logistic.html" />
+    <Content Include="Scripts\app\logistic.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

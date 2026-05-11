@@ -1,10 +1,9 @@
 # ASM DM Loan - Credit Loan Analysis System
 
 ## 📋 Tổng quan dự án
-Hệ thống phân tích và dự đoán khoản vay sử dụng 3 mô hình Machine Learning:
+Hệ thống phân tích và dự đoán khoản vay sử dụng 2 mô hình Machine Learning:
 1. **Decision Tree** - Cây quyết định
-2. **Logistic Regression** - Hồi quy Logistic  
-3. **Clustering** - Phân nhóm khách hàng
+2. **Clustering** - Phân nhóm khách hàng
 
 ## 🏗️ Kiến trúc dự án
 
@@ -13,32 +12,27 @@ Hệ thống phân tích và dự đoán khoản vay sử dụng 3 mô hình Mac
 ASM_DM_Loan_UI/
 ├── Controllers/          # API Controllers - Mỗi model có controller riêng
 │   ├── DecisionTreeController.cs
-│   ├── LogisticRegressionController.cs
 │   ├── ClusteringController.cs
 │   ├── DashboardController.cs
 │   └── ApiController.cs (legacy)
 │
 ├── Services/            # Business Logic - Mỗi model có service riêng
 │   ├── DecisionTreeService.cs
-│   ├── LogisticRegressionService.cs
 │   ├── ClusteringService.cs
 │   ├── DashboardService.cs
 │   └── DMXConnectionService.cs (shared)
 │
 ├── Models/              # Data Models - Mỗi model có models riêng
 │   ├── DecisionTreeModels.cs
-│   ├── LogisticRegressionModels.cs
 │   ├── ClusteringModels.cs
 │   └── CommonModels.cs (shared DTOs)
 │
 ├── Pages/               # HTML Pages
 │   ├── prediction.html      (Decision Tree)
-│   ├── logistic.html        (Logistic Regression)
 │   └── clustering.html      (Clustering)
 │
 ├── Scripts/app/         # JavaScript Modules
 │   ├── prediction.js
-│   ├── logistic.js
 │   ├── clustering.js
 │   └── dashboard.js
 │

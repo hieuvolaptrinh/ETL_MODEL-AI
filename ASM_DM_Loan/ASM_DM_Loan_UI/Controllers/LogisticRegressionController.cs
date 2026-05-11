@@ -6,21 +6,21 @@ using ASM_DM_Loan_UI.Services;
 namespace ASM_DM_Loan_UI.Controllers
 {
     /// <summary>
-    /// API Controller cho Logistic Regression Model (Credit)
+    /// API Controller cho Logistic Regression Model
     /// </summary>
-    [RoutePrefix("api/logistic")]
+    [RoutePrefix("api/logistic-regression")]
     public class LogisticRegressionController : ApiController
     {
-        private readonly LogisticRegressionService _logisticService;
+        private readonly LogisticRegressionService _service;
 
         public LogisticRegressionController()
         {
-            _logisticService = new LogisticRegressionService();
+            _service = new LogisticRegressionService();
         }
 
         /// <summary>
-        /// POST: api/logistic/predict
-        /// Dự đoán khoản vay bằng Logistic Regression
+        /// POST: api/logistic-regression/predict
+        /// Dự đoán nợ xấu bằng Logistic Regression
         /// </summary>
         [HttpPost]
         [Route("predict")]
@@ -33,14 +33,31 @@ namespace ASM_DM_Loan_UI.Controllers
                     return BadRequest(ModelState);
                 }
 
-                var result = _logisticService.PredictLoanApproval(input);
-                
+                var result = _service.PredictBadDebtRisk(input);
                 if (result == null)
                 {
                     return InternalServerError(new Exception("Không thể dự đoán. Vui lòng kiểm tra kết nối SSAS."));
                 }
 
                 return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        /// <summary>
+        /// GET: api/logistic-regression/summary
+        /// Lấy thông tin tổng quan model
+        /// </summary>
+        [HttpGet]
+        [Route("summary")]
+        public IHttpActionResult Summary()
+        {
+            try
+            {
+                return Ok(_service.GetModelSummary());
             }
             catch (Exception ex)
             {

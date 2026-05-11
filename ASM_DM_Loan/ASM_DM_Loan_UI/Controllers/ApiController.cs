@@ -7,7 +7,6 @@ namespace ASM_DM_Loan_UI.Controllers
     /// API Controller chung (Legacy - để tương thích ngược)
     /// Khuyến nghị sử dụng các controller chuyên biệt:
     /// - DecisionTreeController: /api/decision-tree/*
-    /// - LogisticRegressionController: /api/logistic/*
     /// - ClusteringController: /api/clustering/*
     /// - DashboardApiController: /api/dashboard/*
     /// </summary>
@@ -32,7 +31,6 @@ namespace ASM_DM_Loan_UI.Controllers
                 AvailableEndpoints = new
                 {
                     DecisionTree = "/api/decision-tree/predict",
-                    LogisticRegression = "/api/logistic/predict",
                     Clustering = "/api/clustering/predict",
                     ClusteringProfiles = "/api/clustering/profiles",
                     ClusteringSimilar = "/api/clustering/similar-customers",

@@ -10,7 +10,7 @@ class AppHeader extends HTMLElement {
         const navItems = [
             { id: 'dashboard', name: 'Dashboard', href: '/index.html', icon: 'fa-chart-line' },
             { id: 'prediction', name: 'Decision Tree', href: '/Pages/prediction.html', icon: 'fa-code-branch' },
-            { id: 'logistic', name: 'Logistic Regression', href: '/Pages/logistic.html', icon: 'fa-chart-pie' },
+            { id: 'logistic', name: 'Logistic', href: '/Pages/logistic.html', icon: 'fa-chart-pie' },
             { id: 'clustering', name: 'Clustering', href: '/Pages/clustering.html', icon: 'fa-layer-group' }
         ];
 
