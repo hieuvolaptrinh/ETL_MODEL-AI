@@ -8,7 +8,7 @@
     <TransactionalDeployment>false</TransactionalDeployment>
     <PartitionDeployment>DeployPartitions</PartitionDeployment>
     <RoleDeployment>DeployRolesRetainMembers</RoleDeployment>
-    <ProcessingOption>Default</ProcessingOption>
+    <ProcessingOption>DoNotProcess</ProcessingOption>
     <OutputScript></OutputScript>
     <ImpactAnalysisFile></ImpactAnalysisFile>
     <ConfigurationSettingsDeployment>Deploy</ConfigurationSettingsDeployment>
@@ -26,7 +26,7 @@
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.DataSourceView</Type>
-        <TimeStamp>gnEXqYYbcCK9kI18kCnuEmuRIj8=10/05/2026 5:35:39 CH05/05/2026 11:05:40 SA</TimeStamp>
+        <TimeStamp>gnEXqYYbcCK9kI18kCnuEmuRIj8=11/05/2026 5:28:43 CH11/05/2026 5:28:43 CH</TimeStamp>
         <ID>
           <String>ETL Model AI</String>
         </ID>
@@ -47,7 +47,7 @@
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.MiningStructure</Type>
-        <TimeStamp>WhF7lPSmZgwUxHpkMHG8TDBnuwY=10/05/2026 2:59:59 CH10/05/2026 2:56:45 CH</TimeStamp>
+        <TimeStamp>NrrcIXhjrkfCBmTmZECuzqVYYIA=11/05/2026 6:03:31 CH10/05/2026 2:56:45 CH</TimeStamp>
         <ID>
           <String>Credit_Decision_Tree</String>
         </ID>
@@ -64,5 +64,5 @@
   </Snapshot>
   <AssemblyLocations />
   <ProcessingComplete>true</ProcessingComplete>
-  <LastDeployed>2026-05-10T12:03:00.95Z</LastDeployed>
+  <LastDeployed>2026-05-11T11:13:57.566667Z</LastDeployed>
 </DeploymentSnapshot>
